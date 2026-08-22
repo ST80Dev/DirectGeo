@@ -23,7 +23,7 @@ const ETICHETTE_CALDO_FREDDO = {
  * Crea lo stato di una partita.
  * @param {object} puzzle output di generaPuzzle
  * @param {object[]} countries dataset completo (per il match del nome e gli indizi extra)
- * @param {object} difficolta preset da config.DIFFICULTA
+ * @param {object} difficolta preset combinato (config.componiPreset)
  * @param {object} [opzioni] { modalita: 'infinita'|'daily', now?: () => number }
  */
 export function creaPartita(puzzle, countries, difficolta, opzioni = {}) {

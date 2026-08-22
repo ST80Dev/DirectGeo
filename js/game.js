@@ -179,10 +179,12 @@ export function creaPartita(puzzle, countries, difficolta, opzioni = {}) {
 
   // ---- Punteggio (§11) ----
 
+  // Bonus velocità a scatti: −bonusVelocitaPasso punti ogni bonusVelocitaIntervallo
+  // secondi (blocchi), invece di un calo continuo che mette ansia.
   function bonusVelocita() {
     const secondi = ((stato.fine || now()) - stato.inizio) / 1000;
-    const frazione = Math.max(0, 1 - secondi / PUNTEGGIO.bonusVelocitaFinestra);
-    return Math.round(PUNTEGGIO.bonusVelocitaMax * frazione);
+    const blocchi = Math.floor(secondi / PUNTEGGIO.bonusVelocitaIntervallo);
+    return Math.max(0, PUNTEGGIO.bonusVelocitaMax - blocchi * PUNTEGGIO.bonusVelocitaPasso);
   }
 
   // Punteggio "vivo": quanto varrebbe la partita se si vincesse in questo istante.

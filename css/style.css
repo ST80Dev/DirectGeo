@@ -173,7 +173,7 @@ body {
   width: 100%;
   max-width: 660px;
   margin: 0 auto;
-  padding: 1.1rem;
+  padding: 0.8rem;
   flex: 1;
 }
 
@@ -181,8 +181,11 @@ body {
   text-align: center;
   color: var(--testo-soft);
   font-size: 0.85rem;
-  padding: 1.2rem 1rem;
+  padding: 0.9rem 1rem;
 }
+/* Il footer è decorativo: fuori dalla home lo nascondiamo per far stare tutto
+   nell'altezza dello schermo senza scroll. */
+body:not([data-schermata='home']) .footer { display: none; }
 
 .schermata { display: none; }
 .schermata.attiva { display: block; animation: entra 0.25s ease; }
@@ -195,7 +198,7 @@ body {
   background: var(--superficie);
   color: var(--testo);
   border-radius: var(--raggio);
-  padding: 0.8rem 1.2rem;
+  padding: 0.6rem 1rem;
   font-size: 1.05rem;
   font-weight: 700;
   cursor: pointer;
@@ -204,7 +207,7 @@ body {
 .btn:hover:not(:disabled) { border-color: var(--brand); }
 .btn:active:not(:disabled) { transform: translateY(1px); }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.btn--grande { padding: 1.05rem 1.2rem; font-size: 1.15rem; width: 100%; }
+.btn--grande { padding: 0.85rem 1.1rem; font-size: 1.15rem; width: 100%; }
 
 /* 🔵 azione principale / navigazione avanti */
 .btn--primario {
@@ -235,8 +238,8 @@ body {
 
 /* 🟠 aiuti a costo di punti (delineati: opzionali) */
 .btn--aiuto {
-  font-size: 0.98rem;
-  padding: 0.65rem 0.7rem;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.6rem;
   flex: 1;
   background: var(--avviso-soft);
   border-color: var(--avviso);
@@ -290,21 +293,21 @@ body {
 .hero__claim { font-size: 1.18rem; color: var(--testo); }
 .hero__claim strong { color: var(--brand); }
 
-.home-stats { display: flex; gap: 0.7rem; margin-bottom: 1.1rem; }
+.home-stats { display: flex; gap: 0.55rem; margin-bottom: 0.8rem; }
 .pill {
   flex: 1;
   background: var(--superficie);
   border: 1px solid var(--bordo);
   border-top: 4px solid var(--brand);
   border-radius: var(--raggio);
-  padding: 0.7rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   text-align: center;
   box-shadow: var(--ombra-morbida);
 }
 .pill__valore { display: block; font-size: 1.7rem; font-weight: 800; }
 .pill__label { display: block; font-size: 0.82rem; color: var(--testo-soft); }
 
-.pannello { margin: 1.1rem 0; }
+.pannello { margin: 0.8rem 0; }
 .pannello__titolo {
   font-size: 1rem;
   color: var(--testo-soft);
@@ -321,7 +324,7 @@ body {
   background: var(--superficie);
   color: var(--testo);
   border-radius: var(--raggio);
-  padding: 0.7rem 0.5rem;
+  padding: 0.5rem 0.45rem;
   cursor: pointer;
   text-align: center;
   transition: transform 0.08s ease, border-color 0.15s ease, background 0.15s ease;
@@ -355,25 +358,25 @@ body {
 .chip--profilo.chip--attivo { border-color: var(--brand); background: var(--brand-soft); }
 .chip--profilo.chip--attivo .chip__nome { color: var(--brand-2); }
 
-.modi { display: flex; flex-direction: column; gap: 0.7rem; margin: 1.3rem 0; }
+.modi { display: flex; flex-direction: column; gap: 0.55rem; margin: 0.9rem 0; }
 
 .come-si-gioca {
   background: var(--superficie);
   border: 1px solid var(--bordo);
   border-left: 4px solid var(--brand);
   border-radius: var(--raggio);
-  padding: 0.4rem 1.1rem;
-  margin: 1.1rem 0;
+  padding: 0.3rem 1.1rem;
+  margin: 0.8rem 0;
   box-shadow: var(--ombra-morbida);
 }
-.come-si-gioca summary { cursor: pointer; font-weight: 800; padding: 0.6rem 0; font-size: 1.05rem; }
+.come-si-gioca summary { cursor: pointer; font-weight: 800; padding: 0.5rem 0; font-size: 1.05rem; }
 .come-si-gioca ol { margin: 0.4rem 0 0.9rem 1.1rem; padding: 0; color: var(--testo-soft); }
 .come-si-gioca li { margin-bottom: 0.4rem; }
 .come-si-gioca strong { color: var(--testo); }
 .home-link { text-align: center; margin-top: 0.6rem; }
 
 /* ============ Gioco: header e HUD ============ */
-.gioco-header { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.9rem; }
+.gioco-header { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.55rem; }
 .gioco-info { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
 .gioco-info__modalita { font-weight: 800; font-size: 1.15rem; }
 .badge {
@@ -387,31 +390,36 @@ body {
 }
 .badge--profilo { border-color: var(--brand); color: var(--brand-2); background: var(--brand-soft); }
 
-.hud { display: flex; gap: 0.7rem; margin-bottom: 0.9rem; }
+.hud { display: flex; gap: 0.45rem; margin-bottom: 0.55rem; }
 .hud__voce {
   flex: 1;
+  min-width: 0;
   background: var(--superficie);
   border: 1px solid var(--bordo);
-  border-radius: var(--raggio);
-  padding: 0.55rem;
+  border-radius: var(--raggio-s);
+  padding: 0.4rem 0.3rem;
   text-align: center;
   box-shadow: var(--ombra-morbida);
 }
-.hud__label { display: block; font-size: 0.76rem; color: var(--testo-soft); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; }
-.hud__valore { display: block; font-size: 1.5rem; font-weight: 800; }
+.hud__label { display: block; font-size: 0.68rem; color: var(--testo-soft); text-transform: uppercase; letter-spacing: 0.02em; font-weight: 700; line-height: 1.15; }
+.hud__valore { display: block; font-size: 1.3rem; font-weight: 800; }
 .hud__voce:nth-child(1) .hud__valore { color: var(--brand); }
 .hud__voce:nth-child(2) .hud__valore { color: var(--viola); }
 .hud__voce:nth-child(3) .hud__valore { color: var(--ok-2); }
+.hud__voce:nth-child(4) .hud__valore { color: var(--ok); }
 
 /* ============ Corona hub-and-spoke ============ */
 .stage {
   position: relative;
-  width: 100%;
-  max-width: 540px;
-  margin: 0.4rem auto 0.9rem;
+  /* Il lato della corona è limitato anche dall'altezza disponibile: sottraiamo
+     l'ingombro fisso (barre, HUD, input, aiuti) così l'intera schermata di gioco
+     rientra senza scroll su mobile e desktop. */
+  width: min(540px, 100%, calc(100dvh - 470px));
+  min-width: 240px; /* non rimpicciolire oltre: la corona resta leggibile */
+  margin: 0.3rem auto 0.6rem;
   aspect-ratio: 1 / 1;
 }
-.stage--mini { max-width: 380px; }
+.stage--mini { width: min(360px, 100%, 40dvh); }
 
 .corona-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .freccia { stroke: var(--brand); stroke-width: 1.5; stroke-linecap: round; }
@@ -446,7 +454,7 @@ body {
   background: var(--superficie);
   border: 2px solid var(--brand-soft);
   border-radius: var(--raggio-s);
-  padding: 0.34rem 0.24rem;
+  padding: 0.26rem 0.22rem;
   text-align: center;
   box-shadow: var(--ombra);
   pointer-events: none;
@@ -459,11 +467,11 @@ body {
 
 /* ============ Feedback ============ */
 .feedback {
-  min-height: 1.5rem;
-  margin: 0.2rem 0 0.9rem;
+  min-height: 0;
+  margin: 0.1rem 0 0.55rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 0.9rem;
+  gap: 0.35rem 0.85rem;
   align-items: center;
   font-size: 1rem;
   padding: 0;
@@ -473,7 +481,7 @@ body {
   border: 1px solid var(--bordo);
   border-left: 5px solid var(--bordo);
   border-radius: var(--raggio-s);
-  padding: 0.6rem 0.9rem;
+  padding: 0.5rem 0.8rem;
 }
 .feedback__cf { font-weight: 800; }
 .feedback__aiuto { color: var(--brand); font-weight: 600; }
@@ -490,7 +498,7 @@ body {
 .feedback--aiuto { border-left-color: var(--brand); color: var(--brand-2); }
 
 /* ============ Risposta + autocomplete ============ */
-.risposta { display: flex; gap: 0.6rem; margin-bottom: 0.8rem; }
+.risposta { display: flex; gap: 0.55rem; margin-bottom: 0.55rem; }
 .risposta__campo { position: relative; flex: 1; }
 .input {
   width: 100%;
@@ -498,7 +506,7 @@ body {
   background: var(--superficie);
   color: var(--testo);
   border-radius: var(--raggio);
-  padding: 0.8rem 1rem;
+  padding: 0.65rem 0.9rem;
   font-size: 1.1rem;
 }
 .input::placeholder { color: var(--testo-soft); }
@@ -529,7 +537,7 @@ body {
 .ac-nome { font-weight: 600; }
 
 /* ============ Aiuti ============ */
-.aiuti { display: flex; gap: 0.55rem; margin-bottom: 1rem; }
+.aiuti { display: flex; gap: 0.45rem; margin-bottom: 0.6rem; }
 
 /* ============ Lista tentativi ============ */
 .lista-tentativi { display: flex; flex-wrap: wrap; gap: 0.45rem; }
@@ -570,6 +578,7 @@ body {
   box-shadow: var(--ombra-morbida);
 }
 .punteggio-totale { font-size: 2.4rem; font-weight: 900; color: var(--ok-2); }
+.punteggio-cumulativo { margin-top: 0.6rem; font-weight: 800; color: var(--brand); font-size: 1.1rem; }
 .punteggio-righe { list-style: none; padding: 0; margin: 0.6rem 0 0; color: var(--testo-soft); }
 .punteggio-righe li { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--bordo); padding: 0.35rem 0; }
 

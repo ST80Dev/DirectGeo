@@ -159,9 +159,20 @@ imprevedibili — a volte spietate, a volte morbide:
 Poiché il profilo esce dall'RNG passato, la **Sfida del giorno resta
 deterministica** (stessa data ⇒ stesso puzzle).
 
+**Modalità sfida (livello "Pochi", Hard/Very Hard).** Su questo livello due
+parametri per-livello (`LIVELLI_INDIZI`) cambiano il gioco: la **distanza minima
+degli indizi** è alta (10° invece di 3°), così la *prossimità non è mai un
+criterio di scelta* — i confinanti non compaiono perché vicini, ma solo come raro
+residuo casuale; e il flag **`sfida`** disattiva il ripiego sui vicini dello stesso
+continente per l'univocità. Il risultato sono vere corone di **triangolazione
+cross-continente**, con un po' di ambiguità accettata e mitigata dal caldo/freddo
+e dai tentativi. Molti/Medi restano accessibili (indizi vicini ammessi, univocità
+prima).
+
 Parametri iniziali da tarare (in un file di config):
-`minAngularGap`, `tolleranzaUnivocità`, distanza min/max degli indizi,
-`ANTISPIA` (soglie spie + tetto indizi dello stesso continente).
+`minAngularGap`, `tolleranzaUnivocità`, distanza min/max degli indizi (globale e
+per-livello), flag `sfida`, `ANTISPIA` (soglie spie + tetto indizi dello stesso
+continente).
 
 ## 8. Difficoltà
 

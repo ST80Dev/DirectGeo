@@ -14,10 +14,22 @@
  * - minAngularGap: separazione angolare minima tra frecce, in gradi (§7.3).
  * - liv: 1..3 solo per il codice colore in UI (1 facile → 3 difficile).
  */
+// `minClueDist` e `sfida` sono per-livello (§7.4-ter):
+// - minClueDist: distanza minima di un indizio dal target. Bassa (3°) ai livelli
+//   accessibili — gli indizi vicini disambiguano bene. ALTA a "Pochi": la
+//   PROSSIMITÀ non è mai un criterio di scelta, quindi i confinanti (es. Estonia
+//   a 4° dalla Lituania) non compaiono perché vicini; un Paese poco distante può
+//   uscire solo come raro residuo casuale, non per la sua vicinanza. Gli indizi
+//   sono Paesi lontani da triangolare: concetto Hard / Very Hard.
+//   (10° è l'ottimo misurato: azzera i confinanti minimizzando i casi degeneri.)
+// - sfida: a true (solo "Pochi") il generatore NON ripiega sui vicini dello
+//   stesso continente per forzare l'univocità: tiene duro il mix cross-continente
+//   e accetta un po' di ambiguità (mitigata da caldo/freddo e tentativi). A false
+//   (Molti/Medi) l'univocità viene prima e gli indizi vicini sono ammessi.
 export const LIVELLI_INDIZI = {
-  molti: { id: 'molti', nome: 'Molti (7)', clues: 7, tentativi: 5, minAngularGap: 28, liv: 1 },
-  medi: { id: 'medi', nome: 'Medi (5)', clues: 5, tentativi: 4, minAngularGap: 40, liv: 2 },
-  pochi: { id: 'pochi', nome: 'Pochi (4)', clues: 4, tentativi: 3, minAngularGap: 55, liv: 3 },
+  molti: { id: 'molti', nome: 'Molti (7)', clues: 7, tentativi: 5, minAngularGap: 28, liv: 1, minClueDist: 3, sfida: false },
+  medi: { id: 'medi', nome: 'Medi (5)', clues: 5, tentativi: 4, minAngularGap: 40, liv: 2, minClueDist: 3, sfida: false },
+  pochi: { id: 'pochi', nome: 'Pochi (4)', clues: 4, tentativi: 3, minAngularGap: 55, liv: 3, minClueDist: 10, sfida: true },
 };
 
 /**
@@ -51,6 +63,8 @@ export function componiPreset(indiziId = INDIZI_DEFAULT, ampiezzaId = AMPIEZZA_D
     clues: ind.clues,
     tentativi: ind.tentativi,
     minAngularGap: ind.minAngularGap,
+    minClueDist: ind.minClueDist,
+    sfida: ind.sfida,
     maxTier: amp.maxTier,
     targetMaxTier: amp.targetMaxTier,
     // Punteggio base: più difficile su entrambi gli assi = più punti (§11).

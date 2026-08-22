@@ -192,14 +192,26 @@ export function generaPuzzle(countries, difficolta, rng = Math.random, opzioni =
   // vecchia logica: Canada/Russia quasi sempre), né in base ai candidati-indizio.
   // Il target è deciso PRIMA e da solo; gli indizi si scelgono nella FASE 2.
   const target = scegli(targetPool, rng);
+  // Distanza minima degli indizi: per-livello (§7.4-ter). Alta a "Pochi" così gli
+  // indizi non sono i confinanti ovvi (es. Estonia a 4° dalla Lituania) ma Paesi
+  // più lontani, da triangolare davvero.
+  const minDist = difficolta.minClueDist ?? SELEZIONE.minClueDist;
   const candidati = cluePoolTutti
     .filter((c) => c !== target)
     .map((c) => ({ country: c, bearing: bearingFlat(target, c), dist: flatDistance(target, c) }))
-    .filter((c) => c.dist >= SELEZIONE.minClueDist)
+    .filter((c) => c.dist >= minDist)
     .filter((c) => SELEZIONE.maxClueDist === 0 || c.dist <= SELEZIONE.maxClueDist);
-  // Con minClueDist basso praticamente ogni target ha indizi a sufficienza; il
-  // fallback copre solo il caso limite (target senza abbastanza candidati).
-  if (candidati.length < difficolta.clues) return fallbackPuzzle(countries, difficolta, rng);
+  // Se il vincolo di distanza lascia troppi pochi candidati (target molto
+  // isolato a una soglia alta) si ripiega sulla soglia base, poi sul fallback.
+  if (candidati.length < difficolta.clues) {
+    const larghi = cluePoolTutti
+      .filter((c) => c !== target)
+      .map((c) => ({ country: c, bearing: bearingFlat(target, c), dist: flatDistance(target, c) }))
+      .filter((c) => c.dist >= SELEZIONE.minClueDist);
+    if (larghi.length < difficolta.clues) return fallbackPuzzle(countries, difficolta, rng);
+    candidati.length = 0;
+    candidati.push(...larghi);
+  }
 
   // Marca spie e indizi "regionali" per il target scelto (§7.4-bis) ed estrai il
   // profilo di varietà per QUESTO puzzle (§7.4-ter): tetto "regionali" e preferenza
@@ -209,19 +221,20 @@ export function generaPuzzle(countries, difficolta, rng = Math.random, opzioni =
   const { maxLocali, pesoFama } = estraiProfilo(rng, difficolta);
 
   // Livelli di rilassamento provati IN ORDINE (§7.4-bis/ter): dal più "vario e
-  // difficile" al più disambiguante. L'UNIVOCITÀ COMANDA — se i primi livelli
-  // restano ambigui per QUESTO target (fisso), si ripiega sui successivi:
+  // difficile" al più disambiguante:
   //   1) senza indizi-spia, tetto "regionali" stretto  → massima varietà;
   //   2) spie ammesse, tetto stretto                    → certi Paesi (Canada)
   //      sono univoci solo grazie alla spia «USA a Sud»;
   //   3) spie ammesse, NESSUN tetto                      → recupera il potere
-  //      disambiguante degli indizi vicini (come la generazione base) per i
-  //      Paesi "fitti" (Europa/Africa centrale) difficili da rendere univoci.
+  //      disambiguante degli indizi vicini per i Paesi "fitti".
+  // In modalità SFIDA (livello "Pochi") il livello 3 è DISATTIVATO: si tiene duro
+  // il mix cross-continente accettando un po' di ambiguità (mitigata da caldo/freddo
+  // e tentativi), invece di ripiegare sui vicini ovvi. Vera modalità difficile.
   const nonSpie = candidati.filter((c) => !c.spia);
   const fasi = [];
   if (nonSpie.length >= difficolta.clues) fasi.push({ pool: nonSpie, cap: maxLocali });
   fasi.push({ pool: candidati, cap: maxLocali });
-  fasi.push({ pool: candidati, cap: difficolta.clues }); // tetto disattivato
+  if (!difficolta.sfida) fasi.push({ pool: candidati, cap: difficolta.clues });
 
   // FASE 2 — per QUEL target, cerca il set di indizi meno ambiguo possibile,
   // mantenendo sempre esattamente `difficolta.clues` frecce.

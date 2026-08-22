@@ -187,28 +187,19 @@ export function generaPuzzle(countries, difficolta, rng = Math.random, opzioni =
   const targetPool = targetPoolFiltrato.length >= 3 ? targetPoolFiltrato : targetPoolTutti;
   const cluePoolTutti = countries.filter((c) => c.tier <= difficolta.maxTier);
 
-  // FASE 1 — scelta del target UNIFORME, indipendente dall'univocità (PR #4).
-  // È il punto chiave contro il bias: se scegliessimo il target e restituissimo
-  // il primo "univoco", i Paesi isolati (Canada, Russia, Australia, ...) — facili
-  // da rendere univoci — uscirebbero molto più spesso di quelli fitti (Europa,
-  // Africa centrale). Qui ogni target ha la stessa probabilità; si riprova solo
-  // se ha troppi pochi candidati-indizio (caso raro).
-  let target = null;
-  let candidati = null;
-  for (let t = 0; t < 40; t++) {
-    const cand = scegli(targetPool, rng);
-    const lista = cluePoolTutti
-      .filter((c) => c !== cand)
-      .map((c) => ({ country: c, bearing: bearingFlat(cand, c), dist: flatDistance(cand, c) }))
-      .filter((c) => c.dist >= SELEZIONE.minClueDist)
-      .filter((c) => SELEZIONE.maxClueDist === 0 || c.dist <= SELEZIONE.maxClueDist);
-    if (lista.length >= difficolta.clues) {
-      target = cand;
-      candidati = lista;
-      break;
-    }
-  }
-  if (!target) return fallbackPuzzle(countries, difficolta, rng);
+  // FASE 1 — scelta del target PURAMENTE casuale e uniforme nel panel della
+  // difficoltà, SENZA alcun bias: né verso i Paesi isolati (era il difetto della
+  // vecchia logica: Canada/Russia quasi sempre), né in base ai candidati-indizio.
+  // Il target è deciso PRIMA e da solo; gli indizi si scelgono nella FASE 2.
+  const target = scegli(targetPool, rng);
+  const candidati = cluePoolTutti
+    .filter((c) => c !== target)
+    .map((c) => ({ country: c, bearing: bearingFlat(target, c), dist: flatDistance(target, c) }))
+    .filter((c) => c.dist >= SELEZIONE.minClueDist)
+    .filter((c) => SELEZIONE.maxClueDist === 0 || c.dist <= SELEZIONE.maxClueDist);
+  // Con minClueDist basso praticamente ogni target ha indizi a sufficienza; il
+  // fallback copre solo il caso limite (target senza abbastanza candidati).
+  if (candidati.length < difficolta.clues) return fallbackPuzzle(countries, difficolta, rng);
 
   // Marca spie e indizi "regionali" per il target scelto (§7.4-bis) ed estrai il
   // profilo di varietà per QUESTO puzzle (§7.4-ter): tetto "regionali" e preferenza

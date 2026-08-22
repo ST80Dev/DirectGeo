@@ -24,7 +24,7 @@ export const DIFFICULTA = {
     nome: 'Medio',
     clues: 5,
     maxTier: 2,
-    targetMaxTier: 1,
+    targetMaxTier: 2,
     tentativi: 4,
     minAngularGap: 40,
   },
@@ -60,13 +60,12 @@ export const SELEZIONE = {
   minClueDist: 8,
   // Distanza massima: evita indizi troppo lontani/ambigui (0 = nessun limite).
   maxClueDist: 0,
-  // Quanti indizi extra si possono aggiungere per rendere univoco il puzzle (§7.4).
-  maxIndiziExtra: 2,
   // Tolleranza di univocità (§7.4): un altro Paese è "troppo compatibile" se il suo
   // errore angolare medio con gli indizi è entro questo margine dal target.
   tolleranzaUnivocita: 22,
-  // Numero massimo di target da provare prima di arrendersi a un puzzle non perfetto.
-  maxTentativiGenerazione: 60,
+  // Numero massimo di (target + set di indizi) da provare per trovarne uno univoco
+  // mantenendo SEMPRE il numero di indizi scelto (nessun indizio aggiunto).
+  maxTentativiGenerazione: 200,
 };
 
 /** Punteggio (§11). Formula tarabile. */
@@ -76,7 +75,7 @@ export const PUNTEGGIO = {
   penalitaAiuto: 20, // per ogni aiuto usato
   penalitaIndizioExtra: 25, // per ogni indizio extra sbloccato
   bonusVelocitaMax: 100, // bonus massimo se risolto istantaneamente
-  bonusVelocitaFinestra: 60, // secondi entro cui decade il bonus velocità
+  bonusVelocitaFinestra: 120, // secondi entro cui decade il bonus velocità
   minimo: 10, // punteggio minimo garantito per una vittoria
 };
 

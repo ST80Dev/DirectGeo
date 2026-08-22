@@ -40,25 +40,23 @@ function provaSelezione(candidati, n, gap, rng) {
   const pool = mescola(candidati, rng);
   const scelti = [pool[0]];
   while (scelti.length < n) {
-    let migliore = null;
-    let miglioreMinGap = -1;
+    // Tutti i candidati che rispettano il gap minimo, con la loro separazione.
+    const validi = [];
     for (const c of pool) {
       if (scelti.includes(c)) continue;
       const minAngolo = Math.min(
         ...scelti.map((s) => angularDistance(s.bearing, c.bearing))
       );
       if (minAngolo < gap) continue;
-      // Preferisci chi allarga di più la corona; a parità, i più noti (tier basso).
-      if (
-        minAngolo > miglioreMinGap ||
-        (minAngolo === miglioreMinGap && c.country.tier < (migliore?.country.tier ?? 9))
-      ) {
-        migliore = c;
-        miglioreMinGap = minAngolo;
-      }
+      validi.push({ c, minAngolo });
     }
-    if (!migliore) break;
-    scelti.push(migliore);
+    if (validi.length === 0) break;
+    // Buona separazione MA con varietà: scegli a caso tra i migliori candidati,
+    // così la stessa nazione non produce sempre gli stessi indizi.
+    validi.sort((a, b) => b.minAngolo - a.minAngolo);
+    const k = Math.min(3, validi.length);
+    const scelto = validi[Math.floor(rng() * k)];
+    scelti.push(scelto.c);
   }
   return scelti;
 }
@@ -94,19 +92,33 @@ function valutaUnivocita(target, indizi, tutti) {
 
 /**
  * Genera un puzzle per la difficoltà data (§7).
+ *
+ * Il numero di indizi è SEMPRE esattamente `difficolta.clues` (nessun indizio
+ * aggiunto): l'univocità si ottiene provando target e set di indizi diversi
+ * (rigenerazione), non allargando la corona. Gli indizi vengono scelti con una
+ * componente casuale, quindi la stessa nazione produce corone diverse a ogni
+ * partita.
+ *
  * @param {object[]} countries dataset completo
  * @param {object} difficolta preset da config.DIFFICULTA
  * @param {() => number} [rng] generatore [0,1); default Math.random (Infinita).
  *        Per la Sfida del giorno si passa un RNG deterministico (daily.js).
+ * @param {{escludiTarget?: Iterable<string>}} [opzioni] iso dei target da evitare
+ *        (anti-ripetizione tra partite consecutive in modalità Infinita).
  * @returns {{target:object, indizi:{country:object,bearing:number}[],
  *            difficolta:string, minAngularGap:number, univoco:boolean,
  *            indiziBase:number}}
  */
-export function generaPuzzle(countries, difficolta, rng = Math.random) {
-  const targetPool = countries.filter((c) => c.tier <= difficolta.targetMaxTier);
+export function generaPuzzle(countries, difficolta, rng = Math.random, opzioni = {}) {
+  const escludi = new Set(opzioni.escludiTarget || []);
+  const targetPoolTutti = countries.filter((c) => c.tier <= difficolta.targetMaxTier);
+  // Evita di ripetere i target recenti, a meno che non resti scelta sufficiente.
+  const targetPoolFiltrato = targetPoolTutti.filter((c) => !escludi.has(c.iso));
+  const targetPool = targetPoolFiltrato.length >= 3 ? targetPoolFiltrato : targetPoolTutti;
   const cluePoolTutti = countries.filter((c) => c.tier <= difficolta.maxTier);
 
-  let ultimo = null;
+  let migliorePuzzle = null;
+  let miglioreErrore = -1;
 
   for (let tentativo = 0; tentativo < SELEZIONE.maxTentativiGenerazione; tentativo++) {
     const target = scegli(targetPool, rng);
@@ -120,68 +132,36 @@ export function generaPuzzle(countries, difficolta, rng = Math.random) {
 
     if (candidati.length < difficolta.clues) continue;
 
-    let indizi = selezionaIndizi(candidati, difficolta.clues, difficolta.minAngularGap, rng);
-    if (indizi.length < difficolta.clues) continue;
+    const indizi = selezionaIndizi(candidati, difficolta.clues, difficolta.minAngularGap, rng);
+    if (indizi.length < difficolta.clues) continue; // sempre ESATTAMENTE N indizi
 
-    const indiziBase = indizi.length;
+    const { errore } = valutaUnivocita(target, indizi, countries);
 
-    // Controllo univocità + riparazione con indizi extra (§7.4).
-    let { rivale, errore } = valutaUnivocita(target, indizi, countries);
-    let extraAggiunti = 0;
-    while (
-      errore < SELEZIONE.tolleranzaUnivocita &&
-      extraAggiunti < SELEZIONE.maxIndiziExtra
-    ) {
-      const aggiunto = aggiungiIndizioDisambiguante(target, indizi, candidati, rivale);
-      if (!aggiunto) break;
-      indizi.push(aggiunto);
-      extraAggiunti++;
-      ({ rivale, errore } = valutaUnivocita(target, indizi, countries));
+    // Univoco al primo colpo? Restituisci subito, con il numero esatto di indizi.
+    if (errore >= SELEZIONE.tolleranzaUnivocita) {
+      return costruisciPuzzle(target, indizi, difficolta, true);
     }
-
-    const univoco = errore >= SELEZIONE.tolleranzaUnivocita;
-    const puzzle = {
-      target,
-      indizi,
-      difficolta: difficolta.id,
-      minAngularGap: difficolta.minAngularGap,
-      univoco,
-      indiziBase,
-    };
-
-    if (univoco) return puzzle;
-    ultimo = puzzle; // tieni il migliore trovato finora
+    // Altrimenti tieni il tentativo meno ambiguo e continua a rigenerare.
+    if (errore > miglioreErrore) {
+      miglioreErrore = errore;
+      migliorePuzzle = costruisciPuzzle(target, indizi, difficolta, false);
+    }
   }
 
-  // Nessun puzzle perfettamente univoco: restituisci l'ultimo valido (raro).
-  return ultimo || fallbackPuzzle(countries, difficolta, rng);
+  // Nessun puzzle perfettamente univoco: restituisci il meno ambiguo trovato
+  // (sempre con il numero di indizi scelto). Raro con abbastanza tentativi.
+  return migliorePuzzle || fallbackPuzzle(countries, difficolta, rng);
 }
 
-/**
- * Sceglie un indizio extra che massimizzi l'errore del rivale (lo allontana
- * dalla soluzione) mantenendo una buona separazione angolare (§7.4).
- */
-function aggiungiIndizioDisambiguante(target, indiziAttuali, candidati, rivale) {
-  const usati = new Set(indiziAttuali.map((i) => i.country));
-  let migliore = null;
-  let punteggioMax = -Infinity;
-  for (const c of candidati) {
-    if (usati.has(c.country)) continue;
-    const minGap = Math.min(
-      ...indiziAttuali.map((i) => angularDistance(i.bearing, c.bearing))
-    );
-    if (minGap < 15) continue; // non ammucchiare le frecce
-    // Quanto questo indizio "sbugiarda" il rivale:
-    const erroreRivale = rivale
-      ? angularDistance(bearingFlat(rivale, c.country), c.bearing)
-      : 0;
-    const punteggio = erroreRivale + minGap * 0.2;
-    if (punteggio > punteggioMax) {
-      punteggioMax = punteggio;
-      migliore = c;
-    }
-  }
-  return migliore;
+function costruisciPuzzle(target, indizi, difficolta, univoco) {
+  return {
+    target,
+    indizi,
+    difficolta: difficolta.id,
+    minAngularGap: difficolta.minAngularGap,
+    univoco,
+    indiziBase: indizi.length,
+  };
 }
 
 /** Ultima spiaggia: un puzzle qualsiasi valido, senza garanzia di univocità. */

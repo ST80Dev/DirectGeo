@@ -102,7 +102,8 @@ function kp(base, id = profiloAttivo()) {
 // ---- Tema (globale, per dispositivo) ----
 
 export function caricaTema() {
-  return leggi(GK.tema, 'auto'); // 'auto' | 'chiaro' | 'scuro'
+  // Default 'chiaro': look colorato e luminoso all'avvio (niente sfondo scuro di default).
+  return leggi(GK.tema, 'chiaro'); // 'auto' | 'chiaro' | 'scuro'
 }
 
 export function salvaTema(tema) {

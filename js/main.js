@@ -22,6 +22,8 @@ const app = {
   partita: null,
   puzzle: null,
   autocomplete: null,
+  tickPunti: null,
+  ultimiTarget: [], // iso dei target recenti (anti-ripetizione modalità Infinita)
 };
 
 // ---- Avvio ----
@@ -84,6 +86,7 @@ function wireNavigazione() {
   $$('[data-vai]').forEach((btn) =>
     btn.addEventListener('click', () => {
       const dest = btn.dataset.vai;
+      fermaTicker(); // uscendo dal gioco, ferma l'aggiornamento del punteggio
       // Aggiorna il contenuto della schermata di destinazione prima di mostrarla.
       if (dest === 'stats') aggiornaStatistiche();
       if (dest === 'home') {
@@ -199,9 +202,20 @@ function statPill(label, valore) {
 function avviaInfinita() {
   app.modalita = 'infinita';
   const preset = DIFFICULTA[app.difficolta];
-  app.puzzle = generaPuzzle(app.countries, preset, Math.random);
+  // Evita di ripetere i target più recenti (varietà tra partite consecutive).
+  app.puzzle = generaPuzzle(app.countries, preset, Math.random, {
+    escludiTarget: app.ultimiTarget,
+  });
+  ricordaTarget(app.puzzle.target.iso);
   app.partita = creaPartita(app.puzzle, app.countries, preset, { modalita: 'infinita' });
   preparaGioco();
+}
+
+// Memoria dei target recenti per non riproporli subito.
+function ricordaTarget(iso) {
+  app.ultimiTarget.push(iso);
+  const MAX = 8;
+  if (app.ultimiTarget.length > MAX) app.ultimiTarget.splice(0, app.ultimiTarget.length - MAX);
 }
 
 function avviaDaily() {
@@ -281,6 +295,7 @@ function preparaGioco() {
   aggiornaBottoniAiuto();
 
   renderCorona($('#stage'), p.stato.indiziVisibili);
+  avviaTicker();
   input.focus();
 }
 
@@ -288,18 +303,31 @@ function aggiornaContatori() {
   const p = app.partita;
   const rimasti = p.stato.tentativiMax - p.stato.tentativiErrati;
   $('#contatore-tentativi').textContent = `${rimasti}/${p.stato.tentativiMax}`;
-  $('#contatore-punteggio').textContent = `~${p.calcolaPunteggio() || puntiProiettati()}`;
+  aggiornaPunti();
   $('#contatore-indizi').textContent = String(p.stato.indiziVisibili.length);
 }
 
-// Punteggio proiettato prima della vittoria (solo indicativo).
-function puntiProiettati() {
-  const p = app.partita;
-  const base = { facile: 100, medio: 200, difficile: 300 }[p.stato.difficolta.id] || 100;
-  return Math.max(
-    10,
-    base - 15 * p.stato.tentativiErrati - 25 * p.stato.indiziExtraSbloccati - p.stato.costiAiuti
-  );
+// Mostra la proiezione live del punteggio (coincide col punteggio finale, §11).
+function aggiornaPunti() {
+  if (!app.partita) return;
+  $('#contatore-punteggio').textContent = `~${app.partita.punteggioProiettato()}`;
+}
+
+// Ticker: il bonus velocità decade nel tempo, quindi il punteggio va aggiornato
+// ogni secondo anche senza azioni del giocatore (calo coerente).
+function avviaTicker() {
+  fermaTicker();
+  app.tickPunti = setInterval(() => {
+    if (app.partita && !app.partita.terminata()) aggiornaPunti();
+    else fermaTicker();
+  }, 1000);
+}
+
+function fermaTicker() {
+  if (app.tickPunti) {
+    clearInterval(app.tickPunti);
+    app.tickPunti = null;
+  }
 }
 
 function tentativo(testo) {
@@ -400,6 +428,7 @@ function montaFine() {
 
 function concludi(riepilogo) {
   const p = app.partita;
+  fermaTicker();
   $('#input-risposta').disabled = true;
   $('#btn-invia').disabled = true;
 
@@ -478,7 +507,7 @@ function mostraFine(riepilogo) {
     next.addEventListener('click', avviaInfinita);
     azioni.appendChild(next);
   } else {
-    const cond = el('button', { class: 'btn btn--primario' }, '📋 Condividi risultato');
+    const cond = el('button', { class: 'btn btn--daily' }, '📋 Condividi risultato');
     cond.addEventListener('click', () => condividi(riepilogo));
     azioni.appendChild(cond);
   }

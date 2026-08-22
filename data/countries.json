@@ -188,7 +188,7 @@
     "continente": "Europa",
     "lat": 53.2,
     "lng": -8,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "BE",
@@ -199,7 +199,7 @@
     "continente": "Europa",
     "lat": 50.6,
     "lng": 4.6,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "FI",
@@ -210,7 +210,7 @@
     "continente": "Europa",
     "lat": 64.5,
     "lng": 26,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "CZ",
@@ -222,7 +222,7 @@
     "continente": "Europa",
     "lat": 49.8,
     "lng": 15.4,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "HU",
@@ -233,7 +233,7 @@
     "continente": "Europa",
     "lat": 47.2,
     "lng": 19.4,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "RO",
@@ -244,7 +244,7 @@
     "continente": "Europa",
     "lat": 45.9,
     "lng": 25,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "HR",
@@ -255,7 +255,7 @@
     "continente": "Europa",
     "lat": 45.1,
     "lng": 15.4,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "IS",
@@ -266,7 +266,7 @@
     "continente": "Europa",
     "lat": 65,
     "lng": -18.6,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "BG",
@@ -288,7 +288,7 @@
     "continente": "Europa",
     "lat": 44,
     "lng": 20.9,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "BY",
@@ -310,7 +310,7 @@
     "continente": "Europa",
     "lat": 48.7,
     "lng": 19.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "SI",
@@ -321,7 +321,7 @@
     "continente": "Europa",
     "lat": 46.1,
     "lng": 14.8,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "BA",
@@ -333,7 +333,7 @@
     "continente": "Europa",
     "lat": 44,
     "lng": 17.8,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "AL",
@@ -344,7 +344,7 @@
     "continente": "Europa",
     "lat": 41,
     "lng": 20,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "MK",
@@ -356,7 +356,7 @@
     "continente": "Europa",
     "lat": 41.6,
     "lng": 21.7,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "ME",
@@ -367,7 +367,7 @@
     "continente": "Europa",
     "lat": 42.8,
     "lng": 19.3,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "XK",
@@ -378,7 +378,7 @@
     "continente": "Europa",
     "lat": 42.6,
     "lng": 20.9,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "LT",
@@ -389,7 +389,7 @@
     "continente": "Europa",
     "lat": 55.3,
     "lng": 23.9,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "LV",
@@ -400,7 +400,7 @@
     "continente": "Europa",
     "lat": 56.9,
     "lng": 24.9,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "EE",
@@ -411,7 +411,7 @@
     "continente": "Europa",
     "lat": 58.7,
     "lng": 25.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "MD",
@@ -423,7 +423,7 @@
     "continente": "Europa",
     "lat": 47.2,
     "lng": 28.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "LU",
@@ -434,7 +434,7 @@
     "continente": "Europa",
     "lat": 49.8,
     "lng": 6.1,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "AD",
@@ -489,7 +489,7 @@
     "continente": "Europa",
     "lat": 35.9,
     "lng": 14.4,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "VA",
@@ -579,7 +579,7 @@
     "continente": "Asia",
     "lat": -2,
     "lng": 117,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "IR",
@@ -590,7 +590,7 @@
     "continente": "Asia",
     "lat": 32.5,
     "lng": 54,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "IQ",
@@ -601,7 +601,7 @@
     "continente": "Asia",
     "lat": 33,
     "lng": 43.7,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "IL",
@@ -612,7 +612,7 @@
     "continente": "Asia",
     "lat": 31.4,
     "lng": 35,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "TH",
@@ -624,7 +624,7 @@
     "continente": "Asia",
     "lat": 15,
     "lng": 101,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "VN",
@@ -635,7 +635,7 @@
     "continente": "Asia",
     "lat": 16,
     "lng": 106.5,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "MY",
@@ -658,7 +658,7 @@
     "continente": "Asia",
     "lat": 13,
     "lng": 122,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "MM",
@@ -725,7 +725,7 @@
     "continente": "Asia",
     "lat": 40,
     "lng": 127,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "KZ",
@@ -747,7 +747,7 @@
     "continente": "Asia",
     "lat": 33.8,
     "lng": 66,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "SY",
@@ -758,7 +758,7 @@
     "continente": "Asia",
     "lat": 35,
     "lng": 38.5,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "AE",
@@ -771,7 +771,7 @@
     "continente": "Asia",
     "lat": 24,
     "lng": 54,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "PK",
@@ -782,7 +782,7 @@
     "continente": "Asia",
     "lat": 30,
     "lng": 69.3,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "UZ",
@@ -793,7 +793,7 @@
     "continente": "Asia",
     "lat": 41.7,
     "lng": 63.8,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "JO",
@@ -804,7 +804,7 @@
     "continente": "Asia",
     "lat": 31.3,
     "lng": 36.8,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "LB",
@@ -815,7 +815,7 @@
     "continente": "Asia",
     "lat": 33.9,
     "lng": 35.9,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "KW",
@@ -826,7 +826,7 @@
     "continente": "Asia",
     "lat": 29.3,
     "lng": 47.6,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "YE",
@@ -837,7 +837,7 @@
     "continente": "Asia",
     "lat": 15.6,
     "lng": 48,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "OM",
@@ -848,7 +848,7 @@
     "continente": "Asia",
     "lat": 21,
     "lng": 57,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "QA",
@@ -859,7 +859,7 @@
     "continente": "Asia",
     "lat": 25.3,
     "lng": 51.2,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "BH",
@@ -871,7 +871,7 @@
     "continente": "Asia",
     "lat": 26,
     "lng": 50.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "GE",
@@ -882,7 +882,7 @@
     "continente": "Asia",
     "lat": 42.2,
     "lng": 43.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "AM",
@@ -893,7 +893,7 @@
     "continente": "Asia",
     "lat": 40.3,
     "lng": 45,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "AZ",
@@ -904,7 +904,7 @@
     "continente": "Asia",
     "lat": 40.3,
     "lng": 47.6,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "KG",
@@ -948,7 +948,7 @@
     "continente": "Asia",
     "lat": 12.7,
     "lng": 104.9,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "LA",
@@ -959,7 +959,7 @@
     "continente": "Asia",
     "lat": 18.5,
     "lng": 103.8,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "LK",
@@ -970,7 +970,7 @@
     "continente": "Asia",
     "lat": 7.9,
     "lng": 80.7,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "BT",
@@ -1026,7 +1026,7 @@
     "continente": "Asia",
     "lat": 35.1,
     "lng": 33.2,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "PS",
@@ -1037,7 +1037,7 @@
     "continente": "Asia",
     "lat": 31.9,
     "lng": 35.25,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "SG",
@@ -1048,7 +1048,7 @@
     "continente": "Asia",
     "lat": 1.35,
     "lng": 103.8,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "EG",
@@ -1093,7 +1093,7 @@
     "continente": "Africa",
     "lat": 28,
     "lng": 2.5,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "TN",
@@ -1104,7 +1104,7 @@
     "continente": "Africa",
     "lat": 34,
     "lng": 9.5,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "LY",
@@ -1115,7 +1115,7 @@
     "continente": "Africa",
     "lat": 27,
     "lng": 17,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "NG",
@@ -1126,7 +1126,7 @@
     "continente": "Africa",
     "lat": 9.6,
     "lng": 8.1,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "KE",
@@ -1137,7 +1137,7 @@
     "continente": "Africa",
     "lat": 0.5,
     "lng": 37.9,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "ET",
@@ -1148,7 +1148,7 @@
     "continente": "Africa",
     "lat": 8.6,
     "lng": 39.6,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "SD",
@@ -1205,7 +1205,7 @@
     "continente": "Africa",
     "lat": 7.9,
     "lng": -1,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "SN",
@@ -1216,7 +1216,7 @@
     "continente": "Africa",
     "lat": 14.5,
     "lng": -14.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "AO",
@@ -1227,7 +1227,7 @@
     "continente": "Africa",
     "lat": -12.3,
     "lng": 17.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "MZ",
@@ -1238,7 +1238,7 @@
     "continente": "Africa",
     "lat": -17.5,
     "lng": 35.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "ZW",
@@ -1249,7 +1249,7 @@
     "continente": "Africa",
     "lat": -19,
     "lng": 29.8,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "ZM",
@@ -1260,7 +1260,7 @@
     "continente": "Africa",
     "lat": -13.5,
     "lng": 27.8,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "UG",
@@ -1271,7 +1271,7 @@
     "continente": "Africa",
     "lat": 1.3,
     "lng": 32.3,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "CM",
@@ -1282,7 +1282,7 @@
     "continente": "Africa",
     "lat": 5.7,
     "lng": 12.7,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "CI",
@@ -1293,7 +1293,7 @@
     "continente": "Africa",
     "lat": 7.5,
     "lng": -5.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "ML",
@@ -1304,7 +1304,7 @@
     "continente": "Africa",
     "lat": 17.3,
     "lng": -3.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "NE",
@@ -1370,7 +1370,7 @@
     "continente": "Africa",
     "lat": 5.2,
     "lng": 46.2,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "SS",
@@ -1698,7 +1698,7 @@
     "continente": "America Centrale",
     "lat": 21.6,
     "lng": -79,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "GT",
@@ -1709,7 +1709,7 @@
     "continente": "America Centrale",
     "lat": 15.7,
     "lng": -90.4,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "HN",
@@ -1720,7 +1720,7 @@
     "continente": "America Centrale",
     "lat": 14.8,
     "lng": -86.6,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "NI",
@@ -1731,7 +1731,7 @@
     "continente": "America Centrale",
     "lat": 12.9,
     "lng": -85,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "CR",
@@ -1742,7 +1742,7 @@
     "continente": "America Centrale",
     "lat": 9.9,
     "lng": -84,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "PA",
@@ -1753,7 +1753,7 @@
     "continente": "America Centrale",
     "lat": 8.5,
     "lng": -80.1,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "SV",
@@ -1764,7 +1764,7 @@
     "continente": "America Centrale",
     "lat": 13.8,
     "lng": -88.9,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "BZ",
@@ -1786,7 +1786,7 @@
     "continente": "America Centrale",
     "lat": 18.8,
     "lng": -70.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "HT",
@@ -1797,7 +1797,7 @@
     "continente": "America Centrale",
     "lat": 19.1,
     "lng": -72.3,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "JM",
@@ -1808,7 +1808,7 @@
     "continente": "America Centrale",
     "lat": 18.1,
     "lng": -77.3,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "BS",
@@ -1940,7 +1940,7 @@
     "continente": "America Meridionale",
     "lat": -35,
     "lng": -71,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "CO",
@@ -1951,7 +1951,7 @@
     "continente": "America Meridionale",
     "lat": 3.9,
     "lng": -73,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "PE",
@@ -1963,7 +1963,7 @@
     "continente": "America Meridionale",
     "lat": -9.2,
     "lng": -75,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "VE",
@@ -1974,7 +1974,7 @@
     "continente": "America Meridionale",
     "lat": 7.1,
     "lng": -66,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "BO",
@@ -1985,7 +1985,7 @@
     "continente": "America Meridionale",
     "lat": -16.7,
     "lng": -64.7,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "PY",
@@ -1996,7 +1996,7 @@
     "continente": "America Meridionale",
     "lat": -23.4,
     "lng": -58.4,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "UY",
@@ -2007,7 +2007,7 @@
     "continente": "America Meridionale",
     "lat": -32.8,
     "lng": -56,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "EC",
@@ -2018,7 +2018,7 @@
     "continente": "America Meridionale",
     "lat": -1.4,
     "lng": -78.4,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "GY",
@@ -2062,7 +2062,7 @@
     "continente": "Oceania",
     "lat": -43.6,
     "lng": 170.6,
-    "tier": 2
+    "tier": 1
   },
   {
     "iso": "PG",
@@ -2073,7 +2073,7 @@
     "continente": "Oceania",
     "lat": -6.5,
     "lng": 144.5,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "FJ",
@@ -2085,7 +2085,7 @@
     "continente": "Oceania",
     "lat": -17.8,
     "lng": 178,
-    "tier": 3
+    "tier": 2
   },
   {
     "iso": "SB",

@@ -99,6 +99,17 @@ body {
   z-index: 20;
 }
 .topbar__titolo { font-weight: 700; font-size: 1.15rem; }
+.topbar__azioni { display: flex; align-items: center; gap: 0.5rem; }
+.profilo-badge {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--testo-soft);
+  background: var(--bg-3);
+  border: 1px solid var(--bordo);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  white-space: nowrap;
+}
 
 .contenuto {
   width: 100%;
@@ -195,6 +206,9 @@ body {
 .chip--attivo { border-color: var(--accento); background: color-mix(in srgb, var(--accento) 12%, var(--bg-2)); }
 .chip__nome { display: block; font-weight: 700; }
 .chip__meta { display: block; font-size: 0.72rem; color: var(--testo-soft); }
+.chip--profilo { display: flex; align-items: center; justify-content: center; gap: 0.45rem; padding: 0.7rem 0.5rem; }
+.chip--profilo .chip__nome { display: inline; }
+.chip__emoji { font-size: 1.3rem; }
 
 .modi { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.2rem 0; }
 
@@ -222,6 +236,7 @@ body {
   font-size: 0.8rem;
   color: var(--testo-soft);
 }
+.badge--profilo { border-color: color-mix(in srgb, var(--accento) 40%, var(--bordo)); color: var(--accento); }
 
 .hud { display: flex; gap: 0.6rem; margin-bottom: 0.8rem; }
 .hud__voce {

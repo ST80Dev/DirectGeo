@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Rosa dei Paesi — indovina la nazione nascosta triangolando le direzioni dei Paesi-indizio." />
+    <meta name="color-scheme" content="light dark" />
+    <title>Rosa dei Paesi</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar__titolo">🧭 Rosa dei Paesi</div>
+      <button id="btn-tema" class="icona-btn" type="button" title="Cambia tema" aria-label="Cambia tema">🌗</button>
+    </header>
+
+    <main class="contenuto">
+      <!-- ============ HOME ============ -->
+      <section id="schermata-home" class="schermata">
+        <div class="hero">
+          <p class="hero__claim">
+            Indovina la <strong>nazione nascosta</strong> triangolando la corona di
+            Paesi-indizio: ognuno è nella <strong>direzione reale</strong> in cui si
+            trova rispetto al target.
+          </p>
+        </div>
+
+        <div id="home-stats" class="home-stats"></div>
+
+        <div class="pannello">
+          <h2 class="pannello__titolo">Difficoltà</h2>
+          <div id="selettore-difficolta" class="selettore"></div>
+        </div>
+
+        <div class="modi">
+          <button id="btn-infinita" class="btn btn--grande btn--primario" type="button">
+            ♾️ Modalità Infinita
+          </button>
+          <button id="btn-daily" class="btn btn--grande" type="button">
+            📅 Sfida del giorno
+          </button>
+        </div>
+
+        <details class="come-si-gioca">
+          <summary>Come si gioca</summary>
+          <ol>
+            <li>Al centro c'è un cerchio con <strong>?</strong>: è la nazione da indovinare.</li>
+            <li>Attorno, delle frecce puntano verso Paesi noti (bandiera + nome),
+              ciascuna all'<strong>angolo reale</strong> in cui quel Paese si trova.</li>
+            <li>Non contano i confini: contano solo le <strong>direzioni</strong>. Triangola!</li>
+            <li>Digita il nome del Paese (con autocomplete). Hai tentativi limitati.</li>
+            <li>A ogni errore ricevi un piccolo aiuto; puoi spenderne altri a costo di punti.</li>
+          </ol>
+        </details>
+
+        <div class="home-link">
+          <button class="link" type="button" data-vai="stats" id="vai-stats">📊 Le tue statistiche</button>
+        </div>
+      </section>
+
+      <!-- ============ GIOCO ============ -->
+      <section id="schermata-gioco" class="schermata">
+        <div class="gioco-header">
+          <button class="icona-btn" type="button" data-vai="home" title="Torna alla home" aria-label="Torna alla home">←</button>
+          <div class="gioco-info">
+            <span id="gioco-modalita" class="gioco-info__modalita">Modalità Infinita</span>
+            <span id="gioco-difficolta" class="badge">Medio</span>
+          </div>
+        </div>
+
+        <div class="hud">
+          <div class="hud__voce"><span class="hud__label">Tentativi</span><span id="contatore-tentativi" class="hud__valore">–</span></div>
+          <div class="hud__voce"><span class="hud__label">Indizi</span><span id="contatore-indizi" class="hud__valore">–</span></div>
+          <div class="hud__voce"><span class="hud__label">Punti</span><span id="contatore-punteggio" class="hud__valore">–</span></div>
+        </div>
+
+        <div id="stage" class="stage"></div>
+
+        <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+
+        <div class="risposta">
+          <div class="risposta__campo">
+            <input
+              id="input-risposta"
+              class="input"
+              type="text"
+              inputmode="text"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+              placeholder="Scrivi il nome del Paese…"
+              aria-label="Nome del Paese"
+            />
+            <ul id="autocomplete" class="autocomplete" role="listbox"></ul>
+          </div>
+          <button id="btn-invia" class="btn btn--primario" type="button">Invia</button>
+        </div>
+
+        <div class="aiuti">
+          <button id="aiuto-continente" class="btn btn--aiuto" type="button">🌍 Continente <span class="costo">−20</span></button>
+          <button id="aiuto-iniziale" class="btn btn--aiuto" type="button">🔤 Iniziale <span class="costo">−30</span></button>
+          <button id="aiuto-indizio" class="btn btn--aiuto" type="button">➕ Indizio extra <span class="costo">−25</span></button>
+        </div>
+
+        <div id="lista-tentativi" class="lista-tentativi" aria-label="Tentativi precedenti"></div>
+      </section>
+
+      <!-- ============ FINE ROUND ============ -->
+      <section id="schermata-fine" class="schermata">
+        <div id="fine-contenuto" class="fine-contenuto"></div>
+        <div id="fine-azioni" class="fine-azioni"></div>
+      </section>
+
+      <!-- ============ STATISTICHE ============ -->
+      <section id="schermata-stats" class="schermata">
+        <div class="gioco-header">
+          <button class="icona-btn" type="button" data-vai="home" title="Torna alla home" aria-label="Torna alla home">←</button>
+          <div class="gioco-info"><span class="gioco-info__modalita">Statistiche</span></div>
+        </div>
+        <div id="stats-griglia" class="stats-griglia"></div>
+        <p class="nota">La classifica è <strong>locale</strong> (salvata su questo dispositivo). Una classifica online è prevista in futuro.</p>
+        <div class="fine-azioni">
+          <button id="btn-azzera" class="btn btn--pericolo" type="button">Azzera dati</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Rosa dei Paesi · gioco geografico a direzioni</span>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

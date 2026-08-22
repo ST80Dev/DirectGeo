@@ -1,68 +1,2200 @@
 [
-  { "iso": "IT", "nome": "Italia", "alias": ["Italia"], "continente": "Europa", "lat": 42.8, "lng": 12.6, "tier": 1 },
-  { "iso": "FR", "nome": "Francia", "alias": ["Francia"], "continente": "Europa", "lat": 46.6, "lng": 2.5, "tier": 1 },
-  { "iso": "ES", "nome": "Spagna", "alias": ["Spagna"], "continente": "Europa", "lat": 40.3, "lng": -3.6, "tier": 1 },
-  { "iso": "DE", "nome": "Germania", "alias": ["Germania"], "continente": "Europa", "lat": 51.1, "lng": 10.4, "tier": 1 },
-  { "iso": "GB", "nome": "Regno Unito", "alias": ["Regno Unito", "Gran Bretagna", "Inghilterra", "UK"], "continente": "Europa", "lat": 53.0, "lng": -1.6, "tier": 1 },
-  { "iso": "IE", "nome": "Irlanda", "alias": ["Irlanda"], "continente": "Europa", "lat": 53.2, "lng": -8.0, "tier": 2 },
-  { "iso": "PT", "nome": "Portogallo", "alias": ["Portogallo"], "continente": "Europa", "lat": 39.6, "lng": -8.0, "tier": 1 },
-  { "iso": "NL", "nome": "Paesi Bassi", "alias": ["Paesi Bassi", "Olanda"], "continente": "Europa", "lat": 52.2, "lng": 5.5, "tier": 1 },
-  { "iso": "BE", "nome": "Belgio", "alias": ["Belgio"], "continente": "Europa", "lat": 50.6, "lng": 4.6, "tier": 2 },
-  { "iso": "CH", "nome": "Svizzera", "alias": ["Svizzera"], "continente": "Europa", "lat": 46.8, "lng": 8.2, "tier": 1 },
-  { "iso": "AT", "nome": "Austria", "alias": ["Austria"], "continente": "Europa", "lat": 47.6, "lng": 14.1, "tier": 1 },
-  { "iso": "PL", "nome": "Polonia", "alias": ["Polonia"], "continente": "Europa", "lat": 52.1, "lng": 19.4, "tier": 1 },
-  { "iso": "SE", "nome": "Svezia", "alias": ["Svezia"], "continente": "Europa", "lat": 62.8, "lng": 16.5, "tier": 1 },
-  { "iso": "NO", "nome": "Norvegia", "alias": ["Norvegia"], "continente": "Europa", "lat": 63.5, "lng": 11.0, "tier": 1 },
-  { "iso": "FI", "nome": "Finlandia", "alias": ["Finlandia"], "continente": "Europa", "lat": 64.5, "lng": 26.0, "tier": 2 },
-  { "iso": "DK", "nome": "Danimarca", "alias": ["Danimarca"], "continente": "Europa", "lat": 56.0, "lng": 9.5, "tier": 1 },
-  { "iso": "RU", "nome": "Russia", "alias": ["Russia"], "continente": "Asia", "lat": 61.5, "lng": 100.0, "tier": 1 },
-  { "iso": "UA", "nome": "Ucraina", "alias": ["Ucraina"], "continente": "Europa", "lat": 49.0, "lng": 31.5, "tier": 1 },
-  { "iso": "GR", "nome": "Grecia", "alias": ["Grecia"], "continente": "Europa", "lat": 39.5, "lng": 22.0, "tier": 1 },
-  { "iso": "CZ", "nome": "Repubblica Ceca", "alias": ["Repubblica Ceca", "Cechia"], "continente": "Europa", "lat": 49.8, "lng": 15.4, "tier": 2 },
-  { "iso": "HU", "nome": "Ungheria", "alias": ["Ungheria"], "continente": "Europa", "lat": 47.2, "lng": 19.4, "tier": 2 },
-  { "iso": "RO", "nome": "Romania", "alias": ["Romania"], "continente": "Europa", "lat": 45.9, "lng": 25.0, "tier": 2 },
-  { "iso": "HR", "nome": "Croazia", "alias": ["Croazia"], "continente": "Europa", "lat": 45.1, "lng": 15.4, "tier": 2 },
-  { "iso": "IS", "nome": "Islanda", "alias": ["Islanda"], "continente": "Europa", "lat": 65.0, "lng": -18.6, "tier": 2 },
-  { "iso": "CN", "nome": "Cina", "alias": ["Cina"], "continente": "Asia", "lat": 36.0, "lng": 103.0, "tier": 1 },
-  { "iso": "JP", "nome": "Giappone", "alias": ["Giappone"], "continente": "Asia", "lat": 36.5, "lng": 138.0, "tier": 1 },
-  { "iso": "IN", "nome": "India", "alias": ["India"], "continente": "Asia", "lat": 22.5, "lng": 79.0, "tier": 1 },
-  { "iso": "KR", "nome": "Corea del Sud", "alias": ["Corea del Sud", "Corea"], "continente": "Asia", "lat": 36.5, "lng": 127.8, "tier": 1 },
-  { "iso": "TH", "nome": "Thailandia", "alias": ["Thailandia", "Tailandia"], "continente": "Asia", "lat": 15.0, "lng": 101.0, "tier": 2 },
-  { "iso": "VN", "nome": "Vietnam", "alias": ["Vietnam"], "continente": "Asia", "lat": 16.0, "lng": 106.5, "tier": 2 },
-  { "iso": "ID", "nome": "Indonesia", "alias": ["Indonesia"], "continente": "Asia", "lat": -2.0, "lng": 117.0, "tier": 2 },
-  { "iso": "SA", "nome": "Arabia Saudita", "alias": ["Arabia Saudita"], "continente": "Asia", "lat": 24.0, "lng": 45.0, "tier": 1 },
-  { "iso": "IR", "nome": "Iran", "alias": ["Iran"], "continente": "Asia", "lat": 32.5, "lng": 54.0, "tier": 2 },
-  { "iso": "IQ", "nome": "Iraq", "alias": ["Iraq"], "continente": "Asia", "lat": 33.0, "lng": 43.7, "tier": 2 },
-  { "iso": "IL", "nome": "Israele", "alias": ["Israele"], "continente": "Asia", "lat": 31.4, "lng": 35.0, "tier": 2 },
-  { "iso": "TR", "nome": "Turchia", "alias": ["Turchia"], "continente": "Asia", "lat": 39.0, "lng": 35.0, "tier": 1 },
-  { "iso": "PK", "nome": "Pakistan", "alias": ["Pakistan"], "continente": "Asia", "lat": 30.0, "lng": 69.3, "tier": 2 },
-  { "iso": "PH", "nome": "Filippine", "alias": ["Filippine"], "continente": "Asia", "lat": 13.0, "lng": 122.0, "tier": 2 },
-  { "iso": "EG", "nome": "Egitto", "alias": ["Egitto"], "continente": "Africa", "lat": 26.5, "lng": 29.5, "tier": 1 },
-  { "iso": "MA", "nome": "Marocco", "alias": ["Marocco"], "continente": "Africa", "lat": 31.5, "lng": -7.0, "tier": 1 },
-  { "iso": "DZ", "nome": "Algeria", "alias": ["Algeria"], "continente": "Africa", "lat": 28.0, "lng": 2.5, "tier": 2 },
-  { "iso": "TN", "nome": "Tunisia", "alias": ["Tunisia"], "continente": "Africa", "lat": 34.0, "lng": 9.5, "tier": 2 },
-  { "iso": "LY", "nome": "Libia", "alias": ["Libia"], "continente": "Africa", "lat": 27.0, "lng": 17.0, "tier": 2 },
-  { "iso": "ZA", "nome": "Sudafrica", "alias": ["Sudafrica", "Sud Africa"], "continente": "Africa", "lat": -29.0, "lng": 24.0, "tier": 1 },
-  { "iso": "NG", "nome": "Nigeria", "alias": ["Nigeria"], "continente": "Africa", "lat": 9.6, "lng": 8.1, "tier": 2 },
-  { "iso": "KE", "nome": "Kenya", "alias": ["Kenya"], "continente": "Africa", "lat": 0.5, "lng": 37.9, "tier": 2 },
-  { "iso": "ET", "nome": "Etiopia", "alias": ["Etiopia"], "continente": "Africa", "lat": 8.6, "lng": 39.6, "tier": 2 },
-  { "iso": "GH", "nome": "Ghana", "alias": ["Ghana"], "continente": "Africa", "lat": 7.9, "lng": -1.0, "tier": 3 },
-  { "iso": "SN", "nome": "Senegal", "alias": ["Senegal"], "continente": "Africa", "lat": 14.5, "lng": -14.5, "tier": 3 },
-  { "iso": "US", "nome": "Stati Uniti", "alias": ["Stati Uniti", "USA", "America", "Stati Uniti d'America"], "continente": "America Settentrionale", "lat": 39.5, "lng": -98.5, "tier": 1 },
-  { "iso": "CA", "nome": "Canada", "alias": ["Canada"], "continente": "America Settentrionale", "lat": 57.0, "lng": -102.0, "tier": 1 },
-  { "iso": "MX", "nome": "Messico", "alias": ["Messico"], "continente": "America Settentrionale", "lat": 23.6, "lng": -102.5, "tier": 1 },
-  { "iso": "GT", "nome": "Guatemala", "alias": ["Guatemala"], "continente": "America Centrale", "lat": 15.7, "lng": -90.4, "tier": 3 },
-  { "iso": "CU", "nome": "Cuba", "alias": ["Cuba"], "continente": "America Centrale", "lat": 21.6, "lng": -79.0, "tier": 2 },
-  { "iso": "BR", "nome": "Brasile", "alias": ["Brasile"], "continente": "America Meridionale", "lat": -10.0, "lng": -53.0, "tier": 1 },
-  { "iso": "AR", "nome": "Argentina", "alias": ["Argentina"], "continente": "America Meridionale", "lat": -35.0, "lng": -65.0, "tier": 1 },
-  { "iso": "CL", "nome": "Cile", "alias": ["Cile"], "continente": "America Meridionale", "lat": -35.0, "lng": -71.0, "tier": 2 },
-  { "iso": "CO", "nome": "Colombia", "alias": ["Colombia"], "continente": "America Meridionale", "lat": 3.9, "lng": -73.0, "tier": 2 },
-  { "iso": "PE", "nome": "Perù", "alias": ["Perù", "Peru"], "continente": "America Meridionale", "lat": -9.2, "lng": -75.0, "tier": 2 },
-  { "iso": "VE", "nome": "Venezuela", "alias": ["Venezuela"], "continente": "America Meridionale", "lat": 7.1, "lng": -66.0, "tier": 2 },
-  { "iso": "BO", "nome": "Bolivia", "alias": ["Bolivia"], "continente": "America Meridionale", "lat": -16.7, "lng": -64.7, "tier": 3 },
-  { "iso": "PY", "nome": "Paraguay", "alias": ["Paraguay"], "continente": "America Meridionale", "lat": -23.4, "lng": -58.4, "tier": 3 },
-  { "iso": "UY", "nome": "Uruguay", "alias": ["Uruguay"], "continente": "America Meridionale", "lat": -32.8, "lng": -56.0, "tier": 3 },
-  { "iso": "EC", "nome": "Ecuador", "alias": ["Ecuador"], "continente": "America Meridionale", "lat": -1.4, "lng": -78.4, "tier": 3 },
-  { "iso": "AU", "nome": "Australia", "alias": ["Australia"], "continente": "Oceania", "lat": -25.0, "lng": 134.0, "tier": 1 },
-  { "iso": "NZ", "nome": "Nuova Zelanda", "alias": ["Nuova Zelanda"], "continente": "Oceania", "lat": -43.6, "lng": 170.6, "tier": 2 }
+  {
+    "iso": "IT",
+    "nome": "Italia",
+    "alias": [
+      "Italia"
+    ],
+    "continente": "Europa",
+    "lat": 42.8,
+    "lng": 12.6,
+    "tier": 1
+  },
+  {
+    "iso": "FR",
+    "nome": "Francia",
+    "alias": [
+      "Francia"
+    ],
+    "continente": "Europa",
+    "lat": 46.6,
+    "lng": 2.5,
+    "tier": 1
+  },
+  {
+    "iso": "ES",
+    "nome": "Spagna",
+    "alias": [
+      "Spagna"
+    ],
+    "continente": "Europa",
+    "lat": 40.3,
+    "lng": -3.6,
+    "tier": 1
+  },
+  {
+    "iso": "DE",
+    "nome": "Germania",
+    "alias": [
+      "Germania"
+    ],
+    "continente": "Europa",
+    "lat": 51.1,
+    "lng": 10.4,
+    "tier": 1
+  },
+  {
+    "iso": "GB",
+    "nome": "Regno Unito",
+    "alias": [
+      "Regno Unito",
+      "Gran Bretagna",
+      "Inghilterra",
+      "UK"
+    ],
+    "continente": "Europa",
+    "lat": 53,
+    "lng": -1.6,
+    "tier": 1
+  },
+  {
+    "iso": "PT",
+    "nome": "Portogallo",
+    "alias": [
+      "Portogallo"
+    ],
+    "continente": "Europa",
+    "lat": 39.6,
+    "lng": -8,
+    "tier": 1
+  },
+  {
+    "iso": "NL",
+    "nome": "Paesi Bassi",
+    "alias": [
+      "Paesi Bassi",
+      "Olanda"
+    ],
+    "continente": "Europa",
+    "lat": 52.2,
+    "lng": 5.5,
+    "tier": 1
+  },
+  {
+    "iso": "CH",
+    "nome": "Svizzera",
+    "alias": [
+      "Svizzera"
+    ],
+    "continente": "Europa",
+    "lat": 46.8,
+    "lng": 8.2,
+    "tier": 1
+  },
+  {
+    "iso": "AT",
+    "nome": "Austria",
+    "alias": [
+      "Austria"
+    ],
+    "continente": "Europa",
+    "lat": 47.6,
+    "lng": 14.1,
+    "tier": 1
+  },
+  {
+    "iso": "PL",
+    "nome": "Polonia",
+    "alias": [
+      "Polonia"
+    ],
+    "continente": "Europa",
+    "lat": 52.1,
+    "lng": 19.4,
+    "tier": 1
+  },
+  {
+    "iso": "SE",
+    "nome": "Svezia",
+    "alias": [
+      "Svezia"
+    ],
+    "continente": "Europa",
+    "lat": 62.8,
+    "lng": 16.5,
+    "tier": 1
+  },
+  {
+    "iso": "NO",
+    "nome": "Norvegia",
+    "alias": [
+      "Norvegia"
+    ],
+    "continente": "Europa",
+    "lat": 63.5,
+    "lng": 11,
+    "tier": 1
+  },
+  {
+    "iso": "DK",
+    "nome": "Danimarca",
+    "alias": [
+      "Danimarca"
+    ],
+    "continente": "Europa",
+    "lat": 56,
+    "lng": 9.5,
+    "tier": 1
+  },
+  {
+    "iso": "GR",
+    "nome": "Grecia",
+    "alias": [
+      "Grecia"
+    ],
+    "continente": "Europa",
+    "lat": 39.5,
+    "lng": 22,
+    "tier": 1
+  },
+  {
+    "iso": "UA",
+    "nome": "Ucraina",
+    "alias": [
+      "Ucraina"
+    ],
+    "continente": "Europa",
+    "lat": 49,
+    "lng": 31.5,
+    "tier": 1
+  },
+  {
+    "iso": "RU",
+    "nome": "Russia",
+    "alias": [
+      "Russia"
+    ],
+    "continente": "Asia",
+    "lat": 61.5,
+    "lng": 100,
+    "tier": 1
+  },
+  {
+    "iso": "IE",
+    "nome": "Irlanda",
+    "alias": [
+      "Irlanda"
+    ],
+    "continente": "Europa",
+    "lat": 53.2,
+    "lng": -8,
+    "tier": 1
+  },
+  {
+    "iso": "BE",
+    "nome": "Belgio",
+    "alias": [
+      "Belgio"
+    ],
+    "continente": "Europa",
+    "lat": 50.6,
+    "lng": 4.6,
+    "tier": 1
+  },
+  {
+    "iso": "FI",
+    "nome": "Finlandia",
+    "alias": [
+      "Finlandia"
+    ],
+    "continente": "Europa",
+    "lat": 64.5,
+    "lng": 26,
+    "tier": 1
+  },
+  {
+    "iso": "CZ",
+    "nome": "Repubblica Ceca",
+    "alias": [
+      "Repubblica Ceca",
+      "Cechia"
+    ],
+    "continente": "Europa",
+    "lat": 49.8,
+    "lng": 15.4,
+    "tier": 1
+  },
+  {
+    "iso": "HU",
+    "nome": "Ungheria",
+    "alias": [
+      "Ungheria"
+    ],
+    "continente": "Europa",
+    "lat": 47.2,
+    "lng": 19.4,
+    "tier": 1
+  },
+  {
+    "iso": "RO",
+    "nome": "Romania",
+    "alias": [
+      "Romania"
+    ],
+    "continente": "Europa",
+    "lat": 45.9,
+    "lng": 25,
+    "tier": 1
+  },
+  {
+    "iso": "HR",
+    "nome": "Croazia",
+    "alias": [
+      "Croazia"
+    ],
+    "continente": "Europa",
+    "lat": 45.1,
+    "lng": 15.4,
+    "tier": 1
+  },
+  {
+    "iso": "IS",
+    "nome": "Islanda",
+    "alias": [
+      "Islanda"
+    ],
+    "continente": "Europa",
+    "lat": 65,
+    "lng": -18.6,
+    "tier": 1
+  },
+  {
+    "iso": "BG",
+    "nome": "Bulgaria",
+    "alias": [
+      "Bulgaria"
+    ],
+    "continente": "Europa",
+    "lat": 42.7,
+    "lng": 25.2,
+    "tier": 2
+  },
+  {
+    "iso": "RS",
+    "nome": "Serbia",
+    "alias": [
+      "Serbia"
+    ],
+    "continente": "Europa",
+    "lat": 44,
+    "lng": 20.9,
+    "tier": 1
+  },
+  {
+    "iso": "BY",
+    "nome": "Bielorussia",
+    "alias": [
+      "Bielorussia"
+    ],
+    "continente": "Europa",
+    "lat": 53.5,
+    "lng": 28,
+    "tier": 2
+  },
+  {
+    "iso": "SK",
+    "nome": "Slovacchia",
+    "alias": [
+      "Slovacchia"
+    ],
+    "continente": "Europa",
+    "lat": 48.7,
+    "lng": 19.5,
+    "tier": 2
+  },
+  {
+    "iso": "SI",
+    "nome": "Slovenia",
+    "alias": [
+      "Slovenia"
+    ],
+    "continente": "Europa",
+    "lat": 46.1,
+    "lng": 14.8,
+    "tier": 2
+  },
+  {
+    "iso": "BA",
+    "nome": "Bosnia ed Erzegovina",
+    "alias": [
+      "Bosnia ed Erzegovina",
+      "Bosnia"
+    ],
+    "continente": "Europa",
+    "lat": 44,
+    "lng": 17.8,
+    "tier": 2
+  },
+  {
+    "iso": "AL",
+    "nome": "Albania",
+    "alias": [
+      "Albania"
+    ],
+    "continente": "Europa",
+    "lat": 41,
+    "lng": 20,
+    "tier": 2
+  },
+  {
+    "iso": "MK",
+    "nome": "Macedonia del Nord",
+    "alias": [
+      "Macedonia del Nord",
+      "Macedonia"
+    ],
+    "continente": "Europa",
+    "lat": 41.6,
+    "lng": 21.7,
+    "tier": 2
+  },
+  {
+    "iso": "ME",
+    "nome": "Montenegro",
+    "alias": [
+      "Montenegro"
+    ],
+    "continente": "Europa",
+    "lat": 42.8,
+    "lng": 19.3,
+    "tier": 2
+  },
+  {
+    "iso": "XK",
+    "nome": "Kosovo",
+    "alias": [
+      "Kosovo"
+    ],
+    "continente": "Europa",
+    "lat": 42.6,
+    "lng": 20.9,
+    "tier": 2
+  },
+  {
+    "iso": "LT",
+    "nome": "Lituania",
+    "alias": [
+      "Lituania"
+    ],
+    "continente": "Europa",
+    "lat": 55.3,
+    "lng": 23.9,
+    "tier": 2
+  },
+  {
+    "iso": "LV",
+    "nome": "Lettonia",
+    "alias": [
+      "Lettonia"
+    ],
+    "continente": "Europa",
+    "lat": 56.9,
+    "lng": 24.9,
+    "tier": 2
+  },
+  {
+    "iso": "EE",
+    "nome": "Estonia",
+    "alias": [
+      "Estonia"
+    ],
+    "continente": "Europa",
+    "lat": 58.7,
+    "lng": 25.5,
+    "tier": 2
+  },
+  {
+    "iso": "MD",
+    "nome": "Moldova",
+    "alias": [
+      "Moldova",
+      "Moldavia"
+    ],
+    "continente": "Europa",
+    "lat": 47.2,
+    "lng": 28.5,
+    "tier": 2
+  },
+  {
+    "iso": "LU",
+    "nome": "Lussemburgo",
+    "alias": [
+      "Lussemburgo"
+    ],
+    "continente": "Europa",
+    "lat": 49.8,
+    "lng": 6.1,
+    "tier": 2
+  },
+  {
+    "iso": "AD",
+    "nome": "Andorra",
+    "alias": [
+      "Andorra"
+    ],
+    "continente": "Europa",
+    "lat": 42.5,
+    "lng": 1.6,
+    "tier": 3
+  },
+  {
+    "iso": "LI",
+    "nome": "Liechtenstein",
+    "alias": [
+      "Liechtenstein"
+    ],
+    "continente": "Europa",
+    "lat": 47.15,
+    "lng": 9.55,
+    "tier": 3
+  },
+  {
+    "iso": "MC",
+    "nome": "Monaco",
+    "alias": [
+      "Monaco"
+    ],
+    "continente": "Europa",
+    "lat": 43.74,
+    "lng": 7.42,
+    "tier": 3
+  },
+  {
+    "iso": "SM",
+    "nome": "San Marino",
+    "alias": [
+      "San Marino"
+    ],
+    "continente": "Europa",
+    "lat": 43.94,
+    "lng": 12.46,
+    "tier": 3
+  },
+  {
+    "iso": "MT",
+    "nome": "Malta",
+    "alias": [
+      "Malta"
+    ],
+    "continente": "Europa",
+    "lat": 35.9,
+    "lng": 14.4,
+    "tier": 2
+  },
+  {
+    "iso": "VA",
+    "nome": "Città del Vaticano",
+    "alias": [
+      "Città del Vaticano",
+      "Vaticano"
+    ],
+    "continente": "Europa",
+    "lat": 41.9,
+    "lng": 12.45,
+    "tier": 3
+  },
+  {
+    "iso": "CN",
+    "nome": "Cina",
+    "alias": [
+      "Cina"
+    ],
+    "continente": "Asia",
+    "lat": 36,
+    "lng": 103,
+    "tier": 1
+  },
+  {
+    "iso": "JP",
+    "nome": "Giappone",
+    "alias": [
+      "Giappone"
+    ],
+    "continente": "Asia",
+    "lat": 36.5,
+    "lng": 138,
+    "tier": 1
+  },
+  {
+    "iso": "IN",
+    "nome": "India",
+    "alias": [
+      "India"
+    ],
+    "continente": "Asia",
+    "lat": 22.5,
+    "lng": 79,
+    "tier": 1
+  },
+  {
+    "iso": "KR",
+    "nome": "Corea del Sud",
+    "alias": [
+      "Corea del Sud",
+      "Corea"
+    ],
+    "continente": "Asia",
+    "lat": 36.5,
+    "lng": 127.8,
+    "tier": 1
+  },
+  {
+    "iso": "SA",
+    "nome": "Arabia Saudita",
+    "alias": [
+      "Arabia Saudita"
+    ],
+    "continente": "Asia",
+    "lat": 24,
+    "lng": 45,
+    "tier": 1
+  },
+  {
+    "iso": "TR",
+    "nome": "Turchia",
+    "alias": [
+      "Turchia"
+    ],
+    "continente": "Asia",
+    "lat": 39,
+    "lng": 35,
+    "tier": 1
+  },
+  {
+    "iso": "ID",
+    "nome": "Indonesia",
+    "alias": [
+      "Indonesia"
+    ],
+    "continente": "Asia",
+    "lat": -2,
+    "lng": 117,
+    "tier": 1
+  },
+  {
+    "iso": "IR",
+    "nome": "Iran",
+    "alias": [
+      "Iran"
+    ],
+    "continente": "Asia",
+    "lat": 32.5,
+    "lng": 54,
+    "tier": 1
+  },
+  {
+    "iso": "IQ",
+    "nome": "Iraq",
+    "alias": [
+      "Iraq"
+    ],
+    "continente": "Asia",
+    "lat": 33,
+    "lng": 43.7,
+    "tier": 1
+  },
+  {
+    "iso": "IL",
+    "nome": "Israele",
+    "alias": [
+      "Israele"
+    ],
+    "continente": "Asia",
+    "lat": 31.4,
+    "lng": 35,
+    "tier": 1
+  },
+  {
+    "iso": "TH",
+    "nome": "Thailandia",
+    "alias": [
+      "Thailandia",
+      "Tailandia"
+    ],
+    "continente": "Asia",
+    "lat": 15,
+    "lng": 101,
+    "tier": 1
+  },
+  {
+    "iso": "VN",
+    "nome": "Vietnam",
+    "alias": [
+      "Vietnam"
+    ],
+    "continente": "Asia",
+    "lat": 16,
+    "lng": 106.5,
+    "tier": 1
+  },
+  {
+    "iso": "MY",
+    "nome": "Malaysia",
+    "alias": [
+      "Malaysia",
+      "Malesia"
+    ],
+    "continente": "Asia",
+    "lat": 4.2,
+    "lng": 102,
+    "tier": 2
+  },
+  {
+    "iso": "PH",
+    "nome": "Filippine",
+    "alias": [
+      "Filippine"
+    ],
+    "continente": "Asia",
+    "lat": 13,
+    "lng": 122,
+    "tier": 1
+  },
+  {
+    "iso": "MM",
+    "nome": "Birmania",
+    "alias": [
+      "Birmania",
+      "Myanmar"
+    ],
+    "continente": "Asia",
+    "lat": 21,
+    "lng": 96,
+    "tier": 2
+  },
+  {
+    "iso": "BD",
+    "nome": "Bangladesh",
+    "alias": [
+      "Bangladesh"
+    ],
+    "continente": "Asia",
+    "lat": 23.8,
+    "lng": 90.3,
+    "tier": 2
+  },
+  {
+    "iso": "NP",
+    "nome": "Nepal",
+    "alias": [
+      "Nepal"
+    ],
+    "continente": "Asia",
+    "lat": 28.3,
+    "lng": 84,
+    "tier": 2
+  },
+  {
+    "iso": "MN",
+    "nome": "Mongolia",
+    "alias": [
+      "Mongolia"
+    ],
+    "continente": "Asia",
+    "lat": 46.8,
+    "lng": 103,
+    "tier": 2
+  },
+  {
+    "iso": "TW",
+    "nome": "Taiwan",
+    "alias": [
+      "Taiwan"
+    ],
+    "continente": "Asia",
+    "lat": 23.8,
+    "lng": 121,
+    "tier": 2
+  },
+  {
+    "iso": "KP",
+    "nome": "Corea del Nord",
+    "alias": [
+      "Corea del Nord"
+    ],
+    "continente": "Asia",
+    "lat": 40,
+    "lng": 127,
+    "tier": 1
+  },
+  {
+    "iso": "KZ",
+    "nome": "Kazakistan",
+    "alias": [
+      "Kazakistan"
+    ],
+    "continente": "Asia",
+    "lat": 48,
+    "lng": 67,
+    "tier": 2
+  },
+  {
+    "iso": "AF",
+    "nome": "Afghanistan",
+    "alias": [
+      "Afghanistan"
+    ],
+    "continente": "Asia",
+    "lat": 33.8,
+    "lng": 66,
+    "tier": 1
+  },
+  {
+    "iso": "SY",
+    "nome": "Siria",
+    "alias": [
+      "Siria"
+    ],
+    "continente": "Asia",
+    "lat": 35,
+    "lng": 38.5,
+    "tier": 1
+  },
+  {
+    "iso": "AE",
+    "nome": "Emirati Arabi Uniti",
+    "alias": [
+      "Emirati Arabi Uniti",
+      "Emirati",
+      "EAU"
+    ],
+    "continente": "Asia",
+    "lat": 24,
+    "lng": 54,
+    "tier": 1
+  },
+  {
+    "iso": "PK",
+    "nome": "Pakistan",
+    "alias": [
+      "Pakistan"
+    ],
+    "continente": "Asia",
+    "lat": 30,
+    "lng": 69.3,
+    "tier": 1
+  },
+  {
+    "iso": "UZ",
+    "nome": "Uzbekistan",
+    "alias": [
+      "Uzbekistan"
+    ],
+    "continente": "Asia",
+    "lat": 41.7,
+    "lng": 63.8,
+    "tier": 2
+  },
+  {
+    "iso": "JO",
+    "nome": "Giordania",
+    "alias": [
+      "Giordania"
+    ],
+    "continente": "Asia",
+    "lat": 31.3,
+    "lng": 36.8,
+    "tier": 2
+  },
+  {
+    "iso": "LB",
+    "nome": "Libano",
+    "alias": [
+      "Libano"
+    ],
+    "continente": "Asia",
+    "lat": 33.9,
+    "lng": 35.9,
+    "tier": 2
+  },
+  {
+    "iso": "KW",
+    "nome": "Kuwait",
+    "alias": [
+      "Kuwait"
+    ],
+    "continente": "Asia",
+    "lat": 29.3,
+    "lng": 47.6,
+    "tier": 2
+  },
+  {
+    "iso": "YE",
+    "nome": "Yemen",
+    "alias": [
+      "Yemen"
+    ],
+    "continente": "Asia",
+    "lat": 15.6,
+    "lng": 48,
+    "tier": 2
+  },
+  {
+    "iso": "OM",
+    "nome": "Oman",
+    "alias": [
+      "Oman"
+    ],
+    "continente": "Asia",
+    "lat": 21,
+    "lng": 57,
+    "tier": 2
+  },
+  {
+    "iso": "QA",
+    "nome": "Qatar",
+    "alias": [
+      "Qatar"
+    ],
+    "continente": "Asia",
+    "lat": 25.3,
+    "lng": 51.2,
+    "tier": 2
+  },
+  {
+    "iso": "BH",
+    "nome": "Bahrein",
+    "alias": [
+      "Bahrein",
+      "Bahrain"
+    ],
+    "continente": "Asia",
+    "lat": 26,
+    "lng": 50.5,
+    "tier": 2
+  },
+  {
+    "iso": "GE",
+    "nome": "Georgia",
+    "alias": [
+      "Georgia"
+    ],
+    "continente": "Asia",
+    "lat": 42.2,
+    "lng": 43.5,
+    "tier": 2
+  },
+  {
+    "iso": "AM",
+    "nome": "Armenia",
+    "alias": [
+      "Armenia"
+    ],
+    "continente": "Asia",
+    "lat": 40.3,
+    "lng": 45,
+    "tier": 2
+  },
+  {
+    "iso": "AZ",
+    "nome": "Azerbaigian",
+    "alias": [
+      "Azerbaigian"
+    ],
+    "continente": "Asia",
+    "lat": 40.3,
+    "lng": 47.6,
+    "tier": 2
+  },
+  {
+    "iso": "KG",
+    "nome": "Kirghizistan",
+    "alias": [
+      "Kirghizistan"
+    ],
+    "continente": "Asia",
+    "lat": 41.5,
+    "lng": 74.6,
+    "tier": 3
+  },
+  {
+    "iso": "TJ",
+    "nome": "Tagikistan",
+    "alias": [
+      "Tagikistan"
+    ],
+    "continente": "Asia",
+    "lat": 38.9,
+    "lng": 71.3,
+    "tier": 3
+  },
+  {
+    "iso": "TM",
+    "nome": "Turkmenistan",
+    "alias": [
+      "Turkmenistan"
+    ],
+    "continente": "Asia",
+    "lat": 39.1,
+    "lng": 59.4,
+    "tier": 3
+  },
+  {
+    "iso": "KH",
+    "nome": "Cambogia",
+    "alias": [
+      "Cambogia"
+    ],
+    "continente": "Asia",
+    "lat": 12.7,
+    "lng": 104.9,
+    "tier": 2
+  },
+  {
+    "iso": "LA",
+    "nome": "Laos",
+    "alias": [
+      "Laos"
+    ],
+    "continente": "Asia",
+    "lat": 18.5,
+    "lng": 103.8,
+    "tier": 2
+  },
+  {
+    "iso": "LK",
+    "nome": "Sri Lanka",
+    "alias": [
+      "Sri Lanka"
+    ],
+    "continente": "Asia",
+    "lat": 7.9,
+    "lng": 80.7,
+    "tier": 2
+  },
+  {
+    "iso": "BT",
+    "nome": "Bhutan",
+    "alias": [
+      "Bhutan"
+    ],
+    "continente": "Asia",
+    "lat": 27.4,
+    "lng": 90.4,
+    "tier": 3
+  },
+  {
+    "iso": "BN",
+    "nome": "Brunei",
+    "alias": [
+      "Brunei"
+    ],
+    "continente": "Asia",
+    "lat": 4.5,
+    "lng": 114.7,
+    "tier": 3
+  },
+  {
+    "iso": "MV",
+    "nome": "Maldive",
+    "alias": [
+      "Maldive"
+    ],
+    "continente": "Asia",
+    "lat": 3.2,
+    "lng": 73.2,
+    "tier": 3
+  },
+  {
+    "iso": "TL",
+    "nome": "Timor Est",
+    "alias": [
+      "Timor Est",
+      "Timor-Leste"
+    ],
+    "continente": "Asia",
+    "lat": -8.8,
+    "lng": 125.8,
+    "tier": 3
+  },
+  {
+    "iso": "CY",
+    "nome": "Cipro",
+    "alias": [
+      "Cipro"
+    ],
+    "continente": "Asia",
+    "lat": 35.1,
+    "lng": 33.2,
+    "tier": 2
+  },
+  {
+    "iso": "PS",
+    "nome": "Palestina",
+    "alias": [
+      "Palestina"
+    ],
+    "continente": "Asia",
+    "lat": 31.9,
+    "lng": 35.25,
+    "tier": 2
+  },
+  {
+    "iso": "SG",
+    "nome": "Singapore",
+    "alias": [
+      "Singapore"
+    ],
+    "continente": "Asia",
+    "lat": 1.35,
+    "lng": 103.8,
+    "tier": 2
+  },
+  {
+    "iso": "EG",
+    "nome": "Egitto",
+    "alias": [
+      "Egitto"
+    ],
+    "continente": "Africa",
+    "lat": 26.5,
+    "lng": 29.5,
+    "tier": 1
+  },
+  {
+    "iso": "MA",
+    "nome": "Marocco",
+    "alias": [
+      "Marocco"
+    ],
+    "continente": "Africa",
+    "lat": 31.5,
+    "lng": -7,
+    "tier": 1
+  },
+  {
+    "iso": "ZA",
+    "nome": "Sudafrica",
+    "alias": [
+      "Sudafrica",
+      "Sud Africa"
+    ],
+    "continente": "Africa",
+    "lat": -29,
+    "lng": 24,
+    "tier": 1
+  },
+  {
+    "iso": "DZ",
+    "nome": "Algeria",
+    "alias": [
+      "Algeria"
+    ],
+    "continente": "Africa",
+    "lat": 28,
+    "lng": 2.5,
+    "tier": 1
+  },
+  {
+    "iso": "TN",
+    "nome": "Tunisia",
+    "alias": [
+      "Tunisia"
+    ],
+    "continente": "Africa",
+    "lat": 34,
+    "lng": 9.5,
+    "tier": 1
+  },
+  {
+    "iso": "LY",
+    "nome": "Libia",
+    "alias": [
+      "Libia"
+    ],
+    "continente": "Africa",
+    "lat": 27,
+    "lng": 17,
+    "tier": 1
+  },
+  {
+    "iso": "NG",
+    "nome": "Nigeria",
+    "alias": [
+      "Nigeria"
+    ],
+    "continente": "Africa",
+    "lat": 9.6,
+    "lng": 8.1,
+    "tier": 1
+  },
+  {
+    "iso": "KE",
+    "nome": "Kenya",
+    "alias": [
+      "Kenya"
+    ],
+    "continente": "Africa",
+    "lat": 0.5,
+    "lng": 37.9,
+    "tier": 1
+  },
+  {
+    "iso": "ET",
+    "nome": "Etiopia",
+    "alias": [
+      "Etiopia"
+    ],
+    "continente": "Africa",
+    "lat": 8.6,
+    "lng": 39.6,
+    "tier": 1
+  },
+  {
+    "iso": "SD",
+    "nome": "Sudan",
+    "alias": [
+      "Sudan"
+    ],
+    "continente": "Africa",
+    "lat": 15.5,
+    "lng": 30.2,
+    "tier": 2
+  },
+  {
+    "iso": "TZ",
+    "nome": "Tanzania",
+    "alias": [
+      "Tanzania"
+    ],
+    "continente": "Africa",
+    "lat": -6.3,
+    "lng": 34.8,
+    "tier": 2
+  },
+  {
+    "iso": "MG",
+    "nome": "Madagascar",
+    "alias": [
+      "Madagascar"
+    ],
+    "continente": "Africa",
+    "lat": -19.4,
+    "lng": 46.7,
+    "tier": 2
+  },
+  {
+    "iso": "CD",
+    "nome": "Repubblica Democratica del Congo",
+    "alias": [
+      "Repubblica Democratica del Congo",
+      "RD Congo",
+      "Congo Kinshasa"
+    ],
+    "continente": "Africa",
+    "lat": -2.9,
+    "lng": 23.6,
+    "tier": 2
+  },
+  {
+    "iso": "GH",
+    "nome": "Ghana",
+    "alias": [
+      "Ghana"
+    ],
+    "continente": "Africa",
+    "lat": 7.9,
+    "lng": -1,
+    "tier": 2
+  },
+  {
+    "iso": "SN",
+    "nome": "Senegal",
+    "alias": [
+      "Senegal"
+    ],
+    "continente": "Africa",
+    "lat": 14.5,
+    "lng": -14.5,
+    "tier": 2
+  },
+  {
+    "iso": "AO",
+    "nome": "Angola",
+    "alias": [
+      "Angola"
+    ],
+    "continente": "Africa",
+    "lat": -12.3,
+    "lng": 17.5,
+    "tier": 2
+  },
+  {
+    "iso": "MZ",
+    "nome": "Mozambico",
+    "alias": [
+      "Mozambico"
+    ],
+    "continente": "Africa",
+    "lat": -17.5,
+    "lng": 35.5,
+    "tier": 2
+  },
+  {
+    "iso": "ZW",
+    "nome": "Zimbabwe",
+    "alias": [
+      "Zimbabwe"
+    ],
+    "continente": "Africa",
+    "lat": -19,
+    "lng": 29.8,
+    "tier": 2
+  },
+  {
+    "iso": "ZM",
+    "nome": "Zambia",
+    "alias": [
+      "Zambia"
+    ],
+    "continente": "Africa",
+    "lat": -13.5,
+    "lng": 27.8,
+    "tier": 2
+  },
+  {
+    "iso": "UG",
+    "nome": "Uganda",
+    "alias": [
+      "Uganda"
+    ],
+    "continente": "Africa",
+    "lat": 1.3,
+    "lng": 32.3,
+    "tier": 2
+  },
+  {
+    "iso": "CM",
+    "nome": "Camerun",
+    "alias": [
+      "Camerun"
+    ],
+    "continente": "Africa",
+    "lat": 5.7,
+    "lng": 12.7,
+    "tier": 2
+  },
+  {
+    "iso": "CI",
+    "nome": "Costa d'Avorio",
+    "alias": [
+      "Costa d'Avorio"
+    ],
+    "continente": "Africa",
+    "lat": 7.5,
+    "lng": -5.5,
+    "tier": 2
+  },
+  {
+    "iso": "ML",
+    "nome": "Mali",
+    "alias": [
+      "Mali"
+    ],
+    "continente": "Africa",
+    "lat": 17.3,
+    "lng": -3.5,
+    "tier": 2
+  },
+  {
+    "iso": "NE",
+    "nome": "Niger",
+    "alias": [
+      "Niger"
+    ],
+    "continente": "Africa",
+    "lat": 17.6,
+    "lng": 9.4,
+    "tier": 3
+  },
+  {
+    "iso": "TD",
+    "nome": "Ciad",
+    "alias": [
+      "Ciad"
+    ],
+    "continente": "Africa",
+    "lat": 15.4,
+    "lng": 18.7,
+    "tier": 3
+  },
+  {
+    "iso": "BW",
+    "nome": "Botswana",
+    "alias": [
+      "Botswana"
+    ],
+    "continente": "Africa",
+    "lat": -22.2,
+    "lng": 24.7,
+    "tier": 3
+  },
+  {
+    "iso": "NA",
+    "nome": "Namibia",
+    "alias": [
+      "Namibia"
+    ],
+    "continente": "Africa",
+    "lat": -22.1,
+    "lng": 17.2,
+    "tier": 3
+  },
+  {
+    "iso": "MR",
+    "nome": "Mauritania",
+    "alias": [
+      "Mauritania"
+    ],
+    "continente": "Africa",
+    "lat": 20.3,
+    "lng": -10.3,
+    "tier": 3
+  },
+  {
+    "iso": "SO",
+    "nome": "Somalia",
+    "alias": [
+      "Somalia"
+    ],
+    "continente": "Africa",
+    "lat": 5.2,
+    "lng": 46.2,
+    "tier": 2
+  },
+  {
+    "iso": "SS",
+    "nome": "Sudan del Sud",
+    "alias": [
+      "Sudan del Sud"
+    ],
+    "continente": "Africa",
+    "lat": 7.5,
+    "lng": 30,
+    "tier": 3
+  },
+  {
+    "iso": "BF",
+    "nome": "Burkina Faso",
+    "alias": [
+      "Burkina Faso"
+    ],
+    "continente": "Africa",
+    "lat": 12.3,
+    "lng": -1.7,
+    "tier": 3
+  },
+  {
+    "iso": "BJ",
+    "nome": "Benin",
+    "alias": [
+      "Benin"
+    ],
+    "continente": "Africa",
+    "lat": 9.6,
+    "lng": 2.3,
+    "tier": 3
+  },
+  {
+    "iso": "TG",
+    "nome": "Togo",
+    "alias": [
+      "Togo"
+    ],
+    "continente": "Africa",
+    "lat": 8.6,
+    "lng": 1,
+    "tier": 3
+  },
+  {
+    "iso": "GN",
+    "nome": "Guinea",
+    "alias": [
+      "Guinea"
+    ],
+    "continente": "Africa",
+    "lat": 10.4,
+    "lng": -11,
+    "tier": 3
+  },
+  {
+    "iso": "GW",
+    "nome": "Guinea-Bissau",
+    "alias": [
+      "Guinea-Bissau"
+    ],
+    "continente": "Africa",
+    "lat": 12,
+    "lng": -15,
+    "tier": 3
+  },
+  {
+    "iso": "SL",
+    "nome": "Sierra Leone",
+    "alias": [
+      "Sierra Leone"
+    ],
+    "continente": "Africa",
+    "lat": 8.5,
+    "lng": -11.8,
+    "tier": 3
+  },
+  {
+    "iso": "LR",
+    "nome": "Liberia",
+    "alias": [
+      "Liberia"
+    ],
+    "continente": "Africa",
+    "lat": 6.5,
+    "lng": -9.4,
+    "tier": 3
+  },
+  {
+    "iso": "GM",
+    "nome": "Gambia",
+    "alias": [
+      "Gambia"
+    ],
+    "continente": "Africa",
+    "lat": 13.4,
+    "lng": -15.4,
+    "tier": 3
+  },
+  {
+    "iso": "CF",
+    "nome": "Repubblica Centrafricana",
+    "alias": [
+      "Repubblica Centrafricana",
+      "Centrafrica"
+    ],
+    "continente": "Africa",
+    "lat": 6.6,
+    "lng": 20.9,
+    "tier": 3
+  },
+  {
+    "iso": "CG",
+    "nome": "Congo",
+    "alias": [
+      "Congo",
+      "Congo Brazzaville",
+      "Repubblica del Congo"
+    ],
+    "continente": "Africa",
+    "lat": -0.7,
+    "lng": 15.2,
+    "tier": 3
+  },
+  {
+    "iso": "GA",
+    "nome": "Gabon",
+    "alias": [
+      "Gabon"
+    ],
+    "continente": "Africa",
+    "lat": -0.6,
+    "lng": 11.8,
+    "tier": 3
+  },
+  {
+    "iso": "GQ",
+    "nome": "Guinea Equatoriale",
+    "alias": [
+      "Guinea Equatoriale"
+    ],
+    "continente": "Africa",
+    "lat": 1.6,
+    "lng": 10.3,
+    "tier": 3
+  },
+  {
+    "iso": "RW",
+    "nome": "Ruanda",
+    "alias": [
+      "Ruanda",
+      "Rwanda"
+    ],
+    "continente": "Africa",
+    "lat": -2,
+    "lng": 29.9,
+    "tier": 3
+  },
+  {
+    "iso": "BI",
+    "nome": "Burundi",
+    "alias": [
+      "Burundi"
+    ],
+    "continente": "Africa",
+    "lat": -3.4,
+    "lng": 29.9,
+    "tier": 3
+  },
+  {
+    "iso": "MW",
+    "nome": "Malawi",
+    "alias": [
+      "Malawi"
+    ],
+    "continente": "Africa",
+    "lat": -13.2,
+    "lng": 34.3,
+    "tier": 3
+  },
+  {
+    "iso": "LS",
+    "nome": "Lesotho",
+    "alias": [
+      "Lesotho"
+    ],
+    "continente": "Africa",
+    "lat": -29.6,
+    "lng": 28.2,
+    "tier": 3
+  },
+  {
+    "iso": "SZ",
+    "nome": "Eswatini",
+    "alias": [
+      "Eswatini",
+      "Swaziland"
+    ],
+    "continente": "Africa",
+    "lat": -26.5,
+    "lng": 31.5,
+    "tier": 3
+  },
+  {
+    "iso": "ER",
+    "nome": "Eritrea",
+    "alias": [
+      "Eritrea"
+    ],
+    "continente": "Africa",
+    "lat": 15.4,
+    "lng": 38.8,
+    "tier": 3
+  },
+  {
+    "iso": "DJ",
+    "nome": "Gibuti",
+    "alias": [
+      "Gibuti"
+    ],
+    "continente": "Africa",
+    "lat": 11.8,
+    "lng": 42.6,
+    "tier": 3
+  },
+  {
+    "iso": "CV",
+    "nome": "Capo Verde",
+    "alias": [
+      "Capo Verde"
+    ],
+    "continente": "Africa",
+    "lat": 16,
+    "lng": -24,
+    "tier": 3
+  },
+  {
+    "iso": "KM",
+    "nome": "Comore",
+    "alias": [
+      "Comore"
+    ],
+    "continente": "Africa",
+    "lat": -11.6,
+    "lng": 43.3,
+    "tier": 3
+  },
+  {
+    "iso": "ST",
+    "nome": "São Tomé e Príncipe",
+    "alias": [
+      "São Tomé e Príncipe",
+      "Sao Tome e Principe"
+    ],
+    "continente": "Africa",
+    "lat": 0.2,
+    "lng": 6.6,
+    "tier": 3
+  },
+  {
+    "iso": "SC",
+    "nome": "Seychelles",
+    "alias": [
+      "Seychelles"
+    ],
+    "continente": "Africa",
+    "lat": -4.6,
+    "lng": 55.5,
+    "tier": 3
+  },
+  {
+    "iso": "MU",
+    "nome": "Mauritius",
+    "alias": [
+      "Mauritius"
+    ],
+    "continente": "Africa",
+    "lat": -20.2,
+    "lng": 57.5,
+    "tier": 3
+  },
+  {
+    "iso": "US",
+    "nome": "Stati Uniti",
+    "alias": [
+      "Stati Uniti",
+      "USA",
+      "America",
+      "Stati Uniti d'America"
+    ],
+    "continente": "America Settentrionale",
+    "lat": 39.5,
+    "lng": -98.5,
+    "tier": 1
+  },
+  {
+    "iso": "CA",
+    "nome": "Canada",
+    "alias": [
+      "Canada"
+    ],
+    "continente": "America Settentrionale",
+    "lat": 57,
+    "lng": -102,
+    "tier": 1
+  },
+  {
+    "iso": "MX",
+    "nome": "Messico",
+    "alias": [
+      "Messico"
+    ],
+    "continente": "America Settentrionale",
+    "lat": 23.6,
+    "lng": -102.5,
+    "tier": 1
+  },
+  {
+    "iso": "CU",
+    "nome": "Cuba",
+    "alias": [
+      "Cuba"
+    ],
+    "continente": "America Centrale",
+    "lat": 21.6,
+    "lng": -79,
+    "tier": 1
+  },
+  {
+    "iso": "GT",
+    "nome": "Guatemala",
+    "alias": [
+      "Guatemala"
+    ],
+    "continente": "America Centrale",
+    "lat": 15.7,
+    "lng": -90.4,
+    "tier": 2
+  },
+  {
+    "iso": "HN",
+    "nome": "Honduras",
+    "alias": [
+      "Honduras"
+    ],
+    "continente": "America Centrale",
+    "lat": 14.8,
+    "lng": -86.6,
+    "tier": 2
+  },
+  {
+    "iso": "NI",
+    "nome": "Nicaragua",
+    "alias": [
+      "Nicaragua"
+    ],
+    "continente": "America Centrale",
+    "lat": 12.9,
+    "lng": -85,
+    "tier": 2
+  },
+  {
+    "iso": "CR",
+    "nome": "Costa Rica",
+    "alias": [
+      "Costa Rica"
+    ],
+    "continente": "America Centrale",
+    "lat": 9.9,
+    "lng": -84,
+    "tier": 2
+  },
+  {
+    "iso": "PA",
+    "nome": "Panama",
+    "alias": [
+      "Panama"
+    ],
+    "continente": "America Centrale",
+    "lat": 8.5,
+    "lng": -80.1,
+    "tier": 2
+  },
+  {
+    "iso": "SV",
+    "nome": "El Salvador",
+    "alias": [
+      "El Salvador"
+    ],
+    "continente": "America Centrale",
+    "lat": 13.8,
+    "lng": -88.9,
+    "tier": 2
+  },
+  {
+    "iso": "BZ",
+    "nome": "Belize",
+    "alias": [
+      "Belize"
+    ],
+    "continente": "America Centrale",
+    "lat": 17.2,
+    "lng": -88.7,
+    "tier": 3
+  },
+  {
+    "iso": "DO",
+    "nome": "Repubblica Dominicana",
+    "alias": [
+      "Repubblica Dominicana"
+    ],
+    "continente": "America Centrale",
+    "lat": 18.8,
+    "lng": -70.5,
+    "tier": 2
+  },
+  {
+    "iso": "HT",
+    "nome": "Haiti",
+    "alias": [
+      "Haiti"
+    ],
+    "continente": "America Centrale",
+    "lat": 19.1,
+    "lng": -72.3,
+    "tier": 2
+  },
+  {
+    "iso": "JM",
+    "nome": "Giamaica",
+    "alias": [
+      "Giamaica"
+    ],
+    "continente": "America Centrale",
+    "lat": 18.1,
+    "lng": -77.3,
+    "tier": 2
+  },
+  {
+    "iso": "BS",
+    "nome": "Bahamas",
+    "alias": [
+      "Bahamas"
+    ],
+    "continente": "America Centrale",
+    "lat": 24.3,
+    "lng": -76,
+    "tier": 3
+  },
+  {
+    "iso": "TT",
+    "nome": "Trinidad e Tobago",
+    "alias": [
+      "Trinidad e Tobago"
+    ],
+    "continente": "America Centrale",
+    "lat": 10.5,
+    "lng": -61.3,
+    "tier": 3
+  },
+  {
+    "iso": "BB",
+    "nome": "Barbados",
+    "alias": [
+      "Barbados"
+    ],
+    "continente": "America Centrale",
+    "lat": 13.2,
+    "lng": -59.5,
+    "tier": 3
+  },
+  {
+    "iso": "AG",
+    "nome": "Antigua e Barbuda",
+    "alias": [
+      "Antigua e Barbuda"
+    ],
+    "continente": "America Centrale",
+    "lat": 17.1,
+    "lng": -61.8,
+    "tier": 3
+  },
+  {
+    "iso": "DM",
+    "nome": "Dominica",
+    "alias": [
+      "Dominica"
+    ],
+    "continente": "America Centrale",
+    "lat": 15.4,
+    "lng": -61.4,
+    "tier": 3
+  },
+  {
+    "iso": "GD",
+    "nome": "Grenada",
+    "alias": [
+      "Grenada"
+    ],
+    "continente": "America Centrale",
+    "lat": 12.1,
+    "lng": -61.7,
+    "tier": 3
+  },
+  {
+    "iso": "LC",
+    "nome": "Saint Lucia",
+    "alias": [
+      "Saint Lucia"
+    ],
+    "continente": "America Centrale",
+    "lat": 13.9,
+    "lng": -61,
+    "tier": 3
+  },
+  {
+    "iso": "VC",
+    "nome": "Saint Vincent e Grenadine",
+    "alias": [
+      "Saint Vincent e Grenadine"
+    ],
+    "continente": "America Centrale",
+    "lat": 13.2,
+    "lng": -61.2,
+    "tier": 3
+  },
+  {
+    "iso": "KN",
+    "nome": "Saint Kitts e Nevis",
+    "alias": [
+      "Saint Kitts e Nevis"
+    ],
+    "continente": "America Centrale",
+    "lat": 17.3,
+    "lng": -62.7,
+    "tier": 3
+  },
+  {
+    "iso": "BR",
+    "nome": "Brasile",
+    "alias": [
+      "Brasile"
+    ],
+    "continente": "America Meridionale",
+    "lat": -10,
+    "lng": -53,
+    "tier": 1
+  },
+  {
+    "iso": "AR",
+    "nome": "Argentina",
+    "alias": [
+      "Argentina"
+    ],
+    "continente": "America Meridionale",
+    "lat": -35,
+    "lng": -65,
+    "tier": 1
+  },
+  {
+    "iso": "CL",
+    "nome": "Cile",
+    "alias": [
+      "Cile"
+    ],
+    "continente": "America Meridionale",
+    "lat": -35,
+    "lng": -71,
+    "tier": 1
+  },
+  {
+    "iso": "CO",
+    "nome": "Colombia",
+    "alias": [
+      "Colombia"
+    ],
+    "continente": "America Meridionale",
+    "lat": 3.9,
+    "lng": -73,
+    "tier": 1
+  },
+  {
+    "iso": "PE",
+    "nome": "Perù",
+    "alias": [
+      "Perù",
+      "Peru"
+    ],
+    "continente": "America Meridionale",
+    "lat": -9.2,
+    "lng": -75,
+    "tier": 1
+  },
+  {
+    "iso": "VE",
+    "nome": "Venezuela",
+    "alias": [
+      "Venezuela"
+    ],
+    "continente": "America Meridionale",
+    "lat": 7.1,
+    "lng": -66,
+    "tier": 1
+  },
+  {
+    "iso": "BO",
+    "nome": "Bolivia",
+    "alias": [
+      "Bolivia"
+    ],
+    "continente": "America Meridionale",
+    "lat": -16.7,
+    "lng": -64.7,
+    "tier": 2
+  },
+  {
+    "iso": "PY",
+    "nome": "Paraguay",
+    "alias": [
+      "Paraguay"
+    ],
+    "continente": "America Meridionale",
+    "lat": -23.4,
+    "lng": -58.4,
+    "tier": 2
+  },
+  {
+    "iso": "UY",
+    "nome": "Uruguay",
+    "alias": [
+      "Uruguay"
+    ],
+    "continente": "America Meridionale",
+    "lat": -32.8,
+    "lng": -56,
+    "tier": 2
+  },
+  {
+    "iso": "EC",
+    "nome": "Ecuador",
+    "alias": [
+      "Ecuador"
+    ],
+    "continente": "America Meridionale",
+    "lat": -1.4,
+    "lng": -78.4,
+    "tier": 2
+  },
+  {
+    "iso": "GY",
+    "nome": "Guyana",
+    "alias": [
+      "Guyana"
+    ],
+    "continente": "America Meridionale",
+    "lat": 4.8,
+    "lng": -58.9,
+    "tier": 3
+  },
+  {
+    "iso": "SR",
+    "nome": "Suriname",
+    "alias": [
+      "Suriname"
+    ],
+    "continente": "America Meridionale",
+    "lat": 4.1,
+    "lng": -56,
+    "tier": 3
+  },
+  {
+    "iso": "AU",
+    "nome": "Australia",
+    "alias": [
+      "Australia"
+    ],
+    "continente": "Oceania",
+    "lat": -25,
+    "lng": 134,
+    "tier": 1
+  },
+  {
+    "iso": "NZ",
+    "nome": "Nuova Zelanda",
+    "alias": [
+      "Nuova Zelanda"
+    ],
+    "continente": "Oceania",
+    "lat": -43.6,
+    "lng": 170.6,
+    "tier": 1
+  },
+  {
+    "iso": "PG",
+    "nome": "Papua Nuova Guinea",
+    "alias": [
+      "Papua Nuova Guinea"
+    ],
+    "continente": "Oceania",
+    "lat": -6.5,
+    "lng": 144.5,
+    "tier": 2
+  },
+  {
+    "iso": "FJ",
+    "nome": "Figi",
+    "alias": [
+      "Figi",
+      "Fiji"
+    ],
+    "continente": "Oceania",
+    "lat": -17.8,
+    "lng": 178,
+    "tier": 2
+  },
+  {
+    "iso": "SB",
+    "nome": "Isole Salomone",
+    "alias": [
+      "Isole Salomone"
+    ],
+    "continente": "Oceania",
+    "lat": -9.6,
+    "lng": 160.2,
+    "tier": 3
+  },
+  {
+    "iso": "VU",
+    "nome": "Vanuatu",
+    "alias": [
+      "Vanuatu"
+    ],
+    "continente": "Oceania",
+    "lat": -16.3,
+    "lng": 167.5,
+    "tier": 3
+  },
+  {
+    "iso": "WS",
+    "nome": "Samoa",
+    "alias": [
+      "Samoa"
+    ],
+    "continente": "Oceania",
+    "lat": -13.8,
+    "lng": -172.1,
+    "tier": 3
+  },
+  {
+    "iso": "TO",
+    "nome": "Tonga",
+    "alias": [
+      "Tonga"
+    ],
+    "continente": "Oceania",
+    "lat": -21.2,
+    "lng": -175.2,
+    "tier": 3
+  },
+  {
+    "iso": "KI",
+    "nome": "Kiribati",
+    "alias": [
+      "Kiribati"
+    ],
+    "continente": "Oceania",
+    "lat": 1.4,
+    "lng": 173,
+    "tier": 3
+  },
+  {
+    "iso": "FM",
+    "nome": "Micronesia",
+    "alias": [
+      "Micronesia"
+    ],
+    "continente": "Oceania",
+    "lat": 6.9,
+    "lng": 158.2,
+    "tier": 3
+  },
+  {
+    "iso": "MH",
+    "nome": "Isole Marshall",
+    "alias": [
+      "Isole Marshall"
+    ],
+    "continente": "Oceania",
+    "lat": 7.1,
+    "lng": 171,
+    "tier": 3
+  },
+  {
+    "iso": "PW",
+    "nome": "Palau",
+    "alias": [
+      "Palau"
+    ],
+    "continente": "Oceania",
+    "lat": 7.5,
+    "lng": 134.6,
+    "tier": 3
+  },
+  {
+    "iso": "NR",
+    "nome": "Nauru",
+    "alias": [
+      "Nauru"
+    ],
+    "continente": "Oceania",
+    "lat": -0.5,
+    "lng": 166.9,
+    "tier": 3
+  },
+  {
+    "iso": "TV",
+    "nome": "Tuvalu",
+    "alias": [
+      "Tuvalu"
+    ],
+    "continente": "Oceania",
+    "lat": -7.5,
+    "lng": 178.7,
+    "tier": 3
+  }
 ]

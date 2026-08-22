@@ -185,15 +185,28 @@ export function creaPartita(puzzle, countries, difficolta, opzioni = {}) {
     return Math.round(PUNTEGGIO.bonusVelocitaMax * frazione);
   }
 
-  function calcolaPunteggio() {
-    if (!stato.risolta) return 0;
-    const base = PUNTEGGIO.base[stato.difficolta.id] ?? 100;
+  // Punteggio "vivo": quanto varrebbe la partita se si vincesse in questo istante.
+  // Parte dalla base + bonus velocità (che decade nel tempo) e scala penalità e
+  // costi degli aiuti. È la stessa formula del punteggio finale (§11), così la
+  // proiezione mostrata durante il gioco coincide con il punteggio assegnato.
+  function punteggioGrezzo() {
+    const base = stato.difficolta.base ?? 100;
     let p = base;
     p -= PUNTEGGIO.penalitaTentativo * stato.tentativiErrati;
     p -= PUNTEGGIO.penalitaIndizioExtra * stato.indiziExtraSbloccati;
     p -= stato.costiAiuti;
     p += bonusVelocita();
     return Math.max(PUNTEGGIO.minimo, Math.round(p));
+  }
+
+  // Proiezione live mostrata nell'HUD (usa il tempo corrente: cala col tempo).
+  function punteggioProiettato() {
+    return punteggioGrezzo();
+  }
+
+  // Punteggio finale: 0 se non risolta, altrimenti il valore "congelato" alla vittoria.
+  function calcolaPunteggio() {
+    return stato.risolta ? punteggioGrezzo() : 0;
   }
 
   function riepilogo() {
@@ -220,6 +233,7 @@ export function creaPartita(puzzle, countries, difficolta, opzioni = {}) {
     aiutoIndizioExtra,
     indiziExtraDisponibili,
     calcolaPunteggio,
+    punteggioProiettato,
     bonusVelocita,
     riepilogo,
     trovaPaese,

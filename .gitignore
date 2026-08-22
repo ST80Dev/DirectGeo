@@ -1,0 +1,14 @@
+# Dipendenze / build
+node_modules/
+dist/
+
+# Dati sorgente scaricati per la pipeline offline (non versionati)
+tools/*.geojson
+tools/*.json.gz
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

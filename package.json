@@ -1,0 +1,20 @@
+{
+  "name": "rosa-dei-paesi",
+  "version": "0.1.0",
+  "description": "Gioco geografico a direzioni: indovina la nazione nascosta triangolando i Paesi-indizio.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "serve": "python3 -m http.server 8000",
+    "build:centroids": "node tools/build-centroids.mjs"
+  },
+  "keywords": [
+    "gioco",
+    "geografia",
+    "quiz",
+    "browser",
+    "vanilla-js",
+    "github-pages"
+  ],
+  "license": "MIT"
+}

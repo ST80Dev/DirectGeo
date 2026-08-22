@@ -1,0 +1,5 @@
+# Cartella per le bandiere SVG (opzionale, vedi §16 del piano).
+# In v1 il gioco usa le emoji generate dal codice ISO (js/geo.js -> isoToFlagEmoji),
+# quindi qui non serve nessun file. Se in futuro si passa agli SVG (es. flag-icons),
+# metterli qui come <iso-minuscolo>.svg (es. it.svg) e valorizzare il campo
+# "bandiera" in data/countries.json.

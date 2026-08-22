@@ -122,8 +122,46 @@ Input: difficoltà (→ N indizi, tier ammessi). Output: target + lista indizi c
    corona, sposta l'**etichetta** (raggio/offset), **mai** l'angolo della freccia:
    la direzione resta sempre onesta.
 
+### 7.4-bis — Anti-"indizio servito" (casi limite troppo facili)
+
+Alcuni indizi rendono il puzzle banale. Vanno **evitati quando possibile**, ma
+sempre **subordinati all'univocità** (meglio un puzzle univoco con un indizio
+rivelatore che uno ambiguo). Due categorie (config `ANTISPIA`, vedi `config.js`):
+
+1. **Indizio-spia** — un singolo indizio «Paese + direzione» identifica il target
+   quasi da solo (es. «Stati Uniti a Sud» ⇒ per forza Canada). Si riconosce
+   contando i Paesi *rivali* che hanno quello stesso Paese-indizio nella stessa
+   direzione cardinale e a distanza comparabile: pochissimi rivali ⇒ spia. Il
+   generatore prova **due fasi**: prima seleziona gli indizi *senza* spie; se il
+   set così ottenuto non è univoco (per certi Paesi la spia è l'unico ancoraggio
+   possibile) riprova ammettendole. Così le spie spariscono dove non servono e
+   restano solo dove sono indispensabili.
+2. **Corona troppo regionale** — troppi indizi dello stesso continente del target
+   (quasi confinanti): basta riconoscere il "grappolo", non serve triangolare
+   (es. Bolivia+Cile+Uruguay ⇒ Argentina). Si mette un **tetto** al numero di
+   indizi dello stesso continente, così il resto viene da altri continenti e la
+   triangolazione resta necessaria.
+
+### 7.4-ter — Profilo di varietà (imprevedibilità a parità di difficoltà)
+
+La difficoltà di *base* la sceglie il giocatore con i due assi (panel + numero
+indizi). Dentro quella scelta, ogni puzzle estrae dall'RNG un **profilo di
+varietà** (`estraiProfilo` in `puzzle.js`) che rende le corone diverse e
+imprevedibili — a volte spietate, a volte morbide:
+
+- **Tetto "regionali" variabile** — la frazione massima di indizi dello stesso
+  continente è estratta a caso in `[fraLocaliMin, fraLocaliMax]`: certi puzzle
+  sono quasi tutti cross-continente, altri più raccolti.
+- **Ancore meno famose (variabile)** — solo sui panel con più tier: si estrae un
+  "peso fama" casuale; più è alto, più spesso — a parità di buona separazione
+  angolare — si preferisce come indizio la nazione meno nota.
+
+Poiché il profilo esce dall'RNG passato, la **Sfida del giorno resta
+deterministica** (stessa data ⇒ stesso puzzle).
+
 Parametri iniziali da tarare (in un file di config):
-`minAngularGap`, `tolleranzaUnivocità`, distanza min/max degli indizi.
+`minAngularGap`, `tolleranzaUnivocità`, distanza min/max degli indizi,
+`ANTISPIA` (soglie spie + tetto indizi dello stesso continente).
 
 ## 8. Difficoltà
 

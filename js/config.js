@@ -89,6 +89,54 @@ export const SELEZIONE = {
   maxTentativiIndizi: 300,
 };
 
+/**
+ * Anti-"indizio servito" (§7.4-bis): due categorie di indizi troppo rivelatori,
+ * da EVITARE quando possibile ma da riammettere se un target isolato/incastrato
+ * non consente altrimenti di comporre gli N indizi richiesti (evitamento morbido).
+ *
+ * 1) INDIZIO-SPIA — un singolo indizio «Paese + direzione» identifica il target
+ *    quasi da solo. Es.: «Stati Uniti a Sud» ⇒ per forza Canada; «Corea del Sud
+ *    a Ovest» ⇒ Giappone. Si riconosce contando i Paesi "rivali": quante altre
+ *    nazioni hanno quello stesso Paese-indizio nella stessa direzione cardinale e
+ *    a distanza comparabile. Pochissimi rivali ⇒ è una spia.
+ *
+ * 2) CORONA TROPPO REGIONALE — troppi indizi sono vicini dello stesso continente
+ *    del target (quasi confinanti): basta riconoscere il "grappolo" regionale,
+ *    non serve triangolare. Si mette un tetto al numero di indizi "regionali".
+ */
+export const ANTISPIA = {
+  // --- Indizio-spia ---
+  // Un rivale condivide col target la direzione verso l'indizio se sta nello
+  // stesso settore cardinale (±gradi) e a distanza comparabile (entro ±fattore).
+  octantTol: 22.5,
+  distTol: 1.6,
+  // Numero massimo di rivali perché l'indizio sia ancora una "spia" da evitare
+  // (0 = spia assoluta, 1 = una sola alternativa plausibile). Le spie vengono
+  // evitate SOLO quando il target resta comunque univoco senza di esse: per certi
+  // Paesi (es. Canada) la spia «USA a Sud» è l'unico modo di renderli univoci, e
+  // in quei casi si tiene. Vedi la logica a due fasi in puzzle.js.
+  maxRivali: 1,
+
+  // --- Corona troppo regionale (tetto VARIABILE per varietà) ---
+  // Frazione massima di indizi dello stesso continente del target: il resto deve
+  // venire da altri continenti, così bisogna triangolare e non basta riconoscere
+  // il "grappolo" regionale (es. Bolivia+Cile+Uruguay ⇒ per forza Argentina).
+  // Per OGNI puzzle il tetto viene estratto a caso in questo intervallo (dall'rng,
+  // quindi deterministico per la Sfida del giorno): così due partite con la stessa
+  // difficoltà scelta hanno corone diverse — a volte spietate tutte cross-continente
+  // (~1/3), a volte più morbide (~1/2). Vedi `estraiProfilo` in puzzle.js.
+  fraLocaliMin: 0.3,
+  fraLocaliMax: 0.5,
+
+  // --- Ancore meno famose (preferenza VARIABILE per varietà) ---
+  // Solo quando il panel scelto contiene più di un tier (Estesa / Tutto il mondo):
+  // per ogni puzzle si estrae un "peso fama" casuale in [0, pesoFamaMax]; più alto è,
+  // più spesso, a parità di buona separazione angolare, si preferisce come indizio
+  // la nazione MENO nota (tier più alto). Aggiunge varietà e difficoltà senza toccare
+  // la geometria né l'univocità. 0 disattiva del tutto la preferenza.
+  pesoFamaMax: 0.8,
+};
+
 /** Punteggio (§11). Formula tarabile. */
 export const PUNTEGGIO = {
   // Base per asse "indizi" (meno indizi = più punti).

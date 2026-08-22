@@ -143,6 +143,7 @@ Tutti i parametri di bilanciamento stanno in **`js/config.js`**:
   - `LIVELLI_AMPIEZZA` — ampiezza del panel di nazioni (target **e** indizi): *Solo famose* (tier 1) · *Estesa* (tier ≤2) · *Tutto il mondo* (tutte le nazioni).
   - I due assi si scelgono separatamente nella home e si combinano con `componiPreset()`.
 - selezione indizi (`SELEZIONE`): distanze min/max, tolleranza e tentativi di generazione univoca;
+- anti-"indizio servito" (`ANTISPIA`, §7.4-bis): evita gli indizi-spia (un solo indizio che rivela il target, es. «USA a Sud» ⇒ Canada) e le corone troppo regionali (troppi vicini dello stesso continente), senza mai sacrificare l'univocità; il tetto "regionali" (`fraLocaliMin`/`fraLocaliMax`) e la preferenza per ancore meno note (`pesoFamaMax`) sono **estratti a caso per ogni puzzle** (§7.4-ter), così a parità di difficoltà scelta le corone restano varie e imprevedibili — la Sfida del giorno resta comunque deterministica;
 - punteggio (`PUNTEGGIO`): base per asse indizi + bonus per asse ampiezza; costi aiuti (`AIUTI`).
 
 Sono i valori "da tarare giocando" citati in §7, §8, §16.

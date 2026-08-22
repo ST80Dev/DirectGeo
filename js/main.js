@@ -27,9 +27,8 @@ const app = {
 // ---- Avvio ----
 
 async function init() {
-  const impostazioni = store.caricaImpostazioni();
-  app.difficolta = impostazioni.difficolta in DIFFICULTA ? impostazioni.difficolta : DIFFICOLTA_DEFAULT;
-  applicaTema(impostazioni.tema);
+  applicaTema(store.caricaTema());
+  caricaDifficoltaProfilo();
 
   try {
     app.countries = await caricaCountries();
@@ -83,15 +82,81 @@ function vaiA(nome) {
 
 function wireNavigazione() {
   $$('[data-vai]').forEach((btn) =>
-    btn.addEventListener('click', () => vaiA(btn.dataset.vai))
+    btn.addEventListener('click', () => {
+      const dest = btn.dataset.vai;
+      // Aggiorna il contenuto della schermata di destinazione prima di mostrarla.
+      if (dest === 'stats') aggiornaStatistiche();
+      if (dest === 'home') {
+        renderProfili();
+        renderDifficolta();
+        aggiornaProfiloBadge();
+        aggiornaAnteprimaStatistiche();
+      }
+      vaiA(dest);
+    })
   );
 }
 
 // ---- Home ----
 
 function montaHome() {
-  // Selettore difficoltà.
+  renderProfili();
+  renderDifficolta();
+
+  $('#btn-infinita').addEventListener('click', avviaInfinita);
+  $('#btn-daily').addEventListener('click', avviaDaily);
+  $('#btn-tema').addEventListener('click', cicloTema);
+
+  aggiornaProfiloBadge();
+  aggiornaAnteprimaStatistiche();
+}
+
+// Imposta app.difficolta dalla preferenza del profilo attivo.
+function caricaDifficoltaProfilo() {
+  const d = store.caricaImpostazioni().difficolta;
+  app.difficolta = d in DIFFICULTA ? d : DIFFICOLTA_DEFAULT;
+}
+
+// ---- Profili (§14): due giocatori fissi con salvataggi separati ----
+
+function renderProfili() {
+  const cont = $('#selettore-profilo');
+  if (!cont) return;
+  cont.innerHTML = '';
+  const attivo = store.profiloAttivo();
+  store.profili().forEach((p) => {
+    const b = el('button', {
+      class: 'chip chip--profilo' + (p.id === attivo ? ' chip--attivo' : ''),
+      type: 'button',
+    });
+    b.appendChild(el('span', { class: 'chip__emoji' }, p.emoji));
+    b.appendChild(el('span', { class: 'chip__nome' }, p.nome));
+    b.addEventListener('click', () => cambiaProfilo(p.id));
+    cont.appendChild(b);
+  });
+}
+
+function cambiaProfilo(id) {
+  store.impostaProfilo(id);
+  caricaDifficoltaProfilo(); // ogni profilo ha la sua difficoltà preferita
+  renderProfili();
+  renderDifficolta();
+  aggiornaProfiloBadge();
+  aggiornaAnteprimaStatistiche();
+}
+
+function aggiornaProfiloBadge() {
+  const p = store.profiloCorrente();
+  const testo = `${p.emoji} ${p.nome}`;
+  const badge = $('#profilo-badge');
+  if (badge) badge.textContent = testo;
+  const gioco = $('#gioco-profilo');
+  if (gioco) gioco.textContent = testo;
+}
+
+function renderDifficolta() {
   const cont = $('#selettore-difficolta');
+  if (!cont) return;
   cont.innerHTML = '';
   Object.values(DIFFICULTA).forEach((d) => {
     const b = el('button', {
@@ -109,14 +174,6 @@ function montaHome() {
     });
     cont.appendChild(b);
   });
-
-  $('#btn-infinita').addEventListener('click', avviaInfinita);
-  $('#btn-daily').addEventListener('click', avviaDaily);
-
-  // Toggle tema.
-  $('#btn-tema').addEventListener('click', cicloTema);
-
-  aggiornaAnteprimaStatistiche();
 }
 
 function aggiornaAnteprimaStatistiche() {
@@ -215,6 +272,7 @@ function preparaGioco() {
   $('#gioco-modalita').textContent =
     app.modalita === 'daily' ? `Sfida del giorno #${numeroSfida(dataOggi())}` : 'Modalità Infinita';
   $('#gioco-difficolta').textContent = DIFFICULTA[p.stato.difficolta.id].nome;
+  aggiornaProfiloBadge();
 
   aggiornaContatori();
   $('#feedback').innerHTML = '';
@@ -480,8 +538,9 @@ function avvisoTemporaneo(testo, ms = 2500) {
 
 function montaStatistiche() {
   $('#btn-azzera').addEventListener('click', () => {
-    if (confirm('Azzerare tutte le statistiche e i record salvati?')) {
-      store.azzeraTutto();
+    const p = store.profiloCorrente();
+    if (confirm(`Azzerare le statistiche e i record di ${p.nome}?`)) {
+      store.azzeraProfilo();
       aggiornaStatistiche();
       aggiornaAnteprimaStatistiche();
     }
@@ -494,6 +553,12 @@ function aggiornaStatistiche() {
   const r = store.caricaRecord();
   const perc = s.giocate ? Math.round((s.vinte / s.giocate) * 100) : 0;
   const mediaTent = s.giocate ? (s.tentativiTotali / s.giocate).toFixed(1) : '0';
+
+  const intest = $('#stats-profilo');
+  if (intest) {
+    const p = store.profiloCorrente();
+    intest.textContent = `${p.emoji} ${p.nome}`;
+  }
 
   const griglia = $('#stats-griglia');
   griglia.innerHTML = '';
@@ -526,9 +591,9 @@ function applicaTema(tema) {
 }
 
 function cicloTema() {
-  const attuale = store.caricaImpostazioni().tema;
+  const attuale = store.caricaTema();
   const prossimo = attuale === 'auto' ? 'chiaro' : attuale === 'chiaro' ? 'scuro' : 'auto';
-  store.salvaImpostazioni({ tema: prossimo });
+  store.salvaTema(prossimo);
   applicaTema(prossimo);
 }
 

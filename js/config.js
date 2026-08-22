@@ -41,6 +41,19 @@ export const DIFFICULTA = {
 
 export const DIFFICOLTA_DEFAULT = 'medio';
 
+/**
+ * Profili giocatore fissi (§14). Il gioco è pensato per due sole persone sullo
+ * stesso dispositivo: ognuna ha salvataggi separati in localStorage.
+ * Per rinominarli basta cambiare `nome`/`emoji` qui (gli `id` restano stabili,
+ * così i salvataggi già presenti non si perdono).
+ */
+export const PROFILI = [
+  { id: 'papa', nome: 'Papà', emoji: '👨' },
+  { id: 'figlio', nome: 'Figlio', emoji: '🧒' },
+];
+
+export const PROFILO_DEFAULT = 'papa';
+
 /** Vincoli geografici sulla selezione degli indizi (in gradi di mappa piatta, §7). */
 export const SELEZIONE = {
   // Distanza minima di un indizio dal target: evita frecce "sopra" al target.

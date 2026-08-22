@@ -80,6 +80,40 @@ In alternativa: `npx serve` oppure l'estensione "Live Server" di VS Code.
 
 ---
 
+## Giocatori e salvataggi
+
+Il gioco è pensato per **due giocatori fissi** sullo stesso dispositivo (di
+default **Papà** e **Figlio**). Ognuno ha salvataggi **completamente separati**:
+statistiche, record, streak, sfida del giorno e difficoltà preferita.
+
+- Il **profilo attivo** si sceglie in alto nella home (blocco *Giocatore*) ed è
+  mostrato nel badge in cima e nell'intestazione di gioco.
+- Tutto è **locale** al dispositivo/browser (`localStorage`): nessun account,
+  nessun backend, niente da configurare. Se giocate su dispositivi diversi, i
+  dati non si sincronizzano.
+- Il **tema** chiaro/scuro è condiviso (impostazione del dispositivo); la
+  **difficoltà preferita** è invece per-profilo.
+- «Azzera dati» nelle statistiche azzera **solo** il profilo attivo.
+
+Le chiavi in `localStorage` sono organizzate così:
+
+```
+rosadeipaesi:profilo                 # id del profilo attivo (globale)
+rosadeipaesi:tema                    # tema del dispositivo (globale)
+rosadeipaesi:<profilo>:impostazioni  # difficoltà preferita
+rosadeipaesi:<profilo>:statistiche   # partite, vittorie, streak, ...
+rosadeipaesi:<profilo>:record        # miglior punteggio, punti cumulativi
+rosadeipaesi:<profilo>:daily         # sfida del giorno + streak giornaliera
+```
+
+**Per rinominare i giocatori** (es. con i vostri nomi) basta cambiare `nome` ed
+`emoji` in `js/config.js` (`PROFILI`); lasciando invariati gli `id`, i
+salvataggi già presenti non si perdono.
+
+> Se in futuro servisse condividere i punteggi tra più dispositivi, la struttura
+> a chiavi per-profilo rende semplice agganciare **Supabase** senza toccare il
+> resto del gioco. In v1 non serve: restano due profili locali.
+
 ## Dataset e baricentri
 
 Ogni Paese ha un punto di riferimento = **baricentro del landmass contiguo più
@@ -134,5 +168,7 @@ Sono i valori "da tarare giocando" citati in §7, §8, §16.
   *Orientati*, *DoveSono*).
 - **Numero di tentativi** e valori di `minAngularGap` / tolleranza univocità:
   primi valori impostati in `js/config.js`, da rifinire giocando.
-- **Classifica online (Supabase):** rimandata a una versione futura; in v1 tutto
-  è locale (`localStorage`).
+- **Salvataggi:** deciso → **due profili fissi locali** (Papà/Figlio), un
+  salvataggio separato per ciascuno in `localStorage`. Nessun backend.
+- **Classifica online (Supabase):** non necessaria (gioco per 2 persone);
+  rimane un'opzione futura se servisse la sincronizzazione tra dispositivi.

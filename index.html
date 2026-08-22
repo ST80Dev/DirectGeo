@@ -12,7 +12,10 @@
   <body>
     <header class="topbar">
       <div class="topbar__titolo">🧭 Rosa dei Paesi</div>
-      <button id="btn-tema" class="icona-btn" type="button" title="Cambia tema" aria-label="Cambia tema">🌗</button>
+      <div class="topbar__azioni">
+        <span id="profilo-badge" class="profilo-badge" title="Giocatore attivo"></span>
+        <button id="btn-tema" class="icona-btn" type="button" title="Cambia tema" aria-label="Cambia tema">🌗</button>
+      </div>
     </header>
 
     <main class="contenuto">
@@ -24,6 +27,11 @@
             Paesi-indizio: ognuno è nella <strong>direzione reale</strong> in cui si
             trova rispetto al target.
           </p>
+        </div>
+
+        <div class="pannello">
+          <h2 class="pannello__titolo">Giocatore</h2>
+          <div id="selettore-profilo" class="selettore"></div>
         </div>
 
         <div id="home-stats" class="home-stats"></div>
@@ -66,6 +74,7 @@
           <div class="gioco-info">
             <span id="gioco-modalita" class="gioco-info__modalita">Modalità Infinita</span>
             <span id="gioco-difficolta" class="badge">Medio</span>
+            <span id="gioco-profilo" class="badge badge--profilo"></span>
           </div>
         </div>
 
@@ -116,7 +125,10 @@
       <section id="schermata-stats" class="schermata">
         <div class="gioco-header">
           <button class="icona-btn" type="button" data-vai="home" title="Torna alla home" aria-label="Torna alla home">←</button>
-          <div class="gioco-info"><span class="gioco-info__modalita">Statistiche</span></div>
+          <div class="gioco-info">
+            <span class="gioco-info__modalita">Statistiche</span>
+            <span id="stats-profilo" class="badge badge--profilo"></span>
+          </div>
         </div>
         <div id="stats-griglia" class="stats-griglia"></div>
         <p class="nota">La classifica è <strong>locale</strong> (salvata su questo dispositivo). Una classifica online è prevista in futuro.</p>

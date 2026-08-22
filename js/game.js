@@ -190,7 +190,7 @@ export function creaPartita(puzzle, countries, difficolta, opzioni = {}) {
   // costi degli aiuti. È la stessa formula del punteggio finale (§11), così la
   // proiezione mostrata durante il gioco coincide con il punteggio assegnato.
   function punteggioGrezzo() {
-    const base = PUNTEGGIO.base[stato.difficolta.id] ?? 100;
+    const base = stato.difficolta.base ?? 100;
     let p = base;
     p -= PUNTEGGIO.penalitaTentativo * stato.tentativiErrati;
     p -= PUNTEGGIO.penalitaIndizioExtra * stato.indiziExtraSbloccati;

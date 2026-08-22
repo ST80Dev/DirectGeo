@@ -113,10 +113,23 @@ export function salvaTema(tema) {
 
 // ---- Impostazioni per profilo (difficoltà preferita) ----
 
-const IMPOSTAZIONI_DEFAULT = { difficolta: 'medio' };
+const IMPOSTAZIONI_DEFAULT = { indizi: 'medi', ampiezza: 'estesa' };
+
+// Mappa il vecchio singolo asse "difficolta" nei due nuovi assi (retro-compatibilità).
+const MAPPA_LEGACY = {
+  facile: { indizi: 'molti', ampiezza: 'famose' },
+  medio: { indizi: 'medi', ampiezza: 'estesa' },
+  difficile: { indizi: 'pochi', ampiezza: 'mondiale' },
+};
 
 export function caricaImpostazioni() {
-  return { ...IMPOSTAZIONI_DEFAULT, ...leggi(kp('impostazioni'), {}) };
+  const salvato = leggi(kp('impostazioni'), {});
+  // Converte al volo un'impostazione vecchio stile { difficolta: '...' }.
+  if (salvato && salvato.difficolta && !salvato.indizi) {
+    const conv = MAPPA_LEGACY[salvato.difficolta] || {};
+    return { ...IMPOSTAZIONI_DEFAULT, ...conv };
+  }
+  return { ...IMPOSTAZIONI_DEFAULT, ...salvato };
 }
 
 export function salvaImpostazioni(parziale) {

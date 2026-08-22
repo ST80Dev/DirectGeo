@@ -69,7 +69,7 @@ In alternativa: `npx serve` oppure l'estensione "Live Server" di VS Code.
 │  ├─ storage.js              # localStorage: record, statistiche, impostazioni (§14)
 │  └─ daily.js                # seed per data (mulberry32) + condivisione (§13)
 ├─ data/
-│  └─ countries.json          # dataset precalcolato: ~65 Paesi (§6)
+│  └─ countries.json          # dataset precalcolato: 197 Paesi (quasi tutti gli Stati) (§6)
 ├─ assets/
 │  └─ flags/                  # (opzionale) SVG bandiere; in v1 si usano le emoji
 ├─ tools/
@@ -138,9 +138,12 @@ presenti in `data/countries.json` e ricalcola solo `lat`/`lng`.
 
 Tutti i parametri di bilanciamento stanno in **`js/config.js`**:
 
-- difficoltà (`DIFFICULTA`): numero di indizi, tier ammessi, tentativi, `minAngularGap`;
-- selezione indizi (`SELEZIONE`): distanze min/max, tolleranza di univocità;
-- punteggio (`PUNTEGGIO`) e costi degli aiuti (`AIUTI`).
+- **Difficoltà a due assi indipendenti** (§8):
+  - `LIVELLI_INDIZI` — quantità di indizi: *Molti (7)* · *Medi (5)* · *Pochi (4)*, con tentativi e separazione angolare.
+  - `LIVELLI_AMPIEZZA` — ampiezza del panel di nazioni (target **e** indizi): *Solo famose* (tier 1) · *Estesa* (tier ≤2) · *Tutto il mondo* (tutte le nazioni).
+  - I due assi si scelgono separatamente nella home e si combinano con `componiPreset()`.
+- selezione indizi (`SELEZIONE`): distanze min/max, tolleranza e tentativi di generazione univoca;
+- punteggio (`PUNTEGGIO`): base per asse indizi + bonus per asse ampiezza; costi aiuti (`AIUTI`).
 
 Sono i valori "da tarare giocando" citati in §7, §8, §16.
 

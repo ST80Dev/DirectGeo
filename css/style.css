@@ -330,16 +330,17 @@ body {
 .chip__nome { display: block; font-weight: 800; font-size: 1.05rem; }
 .chip__meta { display: block; font-size: 0.78rem; color: var(--testo-soft); margin-top: 0.1rem; }
 
-/* Difficoltà con codice colore coerente: verde/ambra/rosso */
-.chip[data-diff='facile'] { border-bottom: 4px solid var(--ok); }
-.chip[data-diff='medio'] { border-bottom: 4px solid var(--avviso); }
-.chip[data-diff='difficile'] { border-bottom: 4px solid var(--pericolo); }
-.chip[data-diff='facile'].chip--attivo { border-color: var(--ok); background: var(--ok-soft); }
-.chip[data-diff='medio'].chip--attivo { border-color: var(--avviso); background: var(--avviso-soft); }
-.chip[data-diff='difficile'].chip--attivo { border-color: var(--pericolo); background: var(--pericolo-soft); }
-.chip[data-diff='facile'].chip--attivo .chip__nome { color: var(--ok-2); }
-.chip[data-diff='medio'].chip--attivo .chip__nome { color: var(--avviso-2); }
-.chip[data-diff='difficile'].chip--attivo .chip__nome { color: var(--pericolo-2); }
+/* Codice colore per livello di difficoltà (1 facile → 3 difficile), su entrambi
+   gli assi (indizi e varietà): verde → ambra → rosso. */
+.chip[data-liv='1'] { border-bottom: 4px solid var(--ok); }
+.chip[data-liv='2'] { border-bottom: 4px solid var(--avviso); }
+.chip[data-liv='3'] { border-bottom: 4px solid var(--pericolo); }
+.chip[data-liv='1'].chip--attivo { border-color: var(--ok); background: var(--ok-soft); }
+.chip[data-liv='2'].chip--attivo { border-color: var(--avviso); background: var(--avviso-soft); }
+.chip[data-liv='3'].chip--attivo { border-color: var(--pericolo); background: var(--pericolo-soft); }
+.chip[data-liv='1'].chip--attivo .chip__nome { color: var(--ok-2); }
+.chip[data-liv='2'].chip--attivo .chip__nome { color: var(--avviso-2); }
+.chip[data-liv='3'].chip--attivo .chip__nome { color: var(--pericolo-2); }
 
 /* Profili: accento indaco quando attivi */
 .chip--profilo {

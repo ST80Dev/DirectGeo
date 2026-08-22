@@ -1,6 +1,12 @@
 // main.js — Bootstrap, caricamento dati, routing delle schermate (§15, §17).
 
-import { DIFFICULTA, DIFFICOLTA_DEFAULT } from './config.js';
+import {
+  LIVELLI_INDIZI,
+  LIVELLI_AMPIEZZA,
+  INDIZI_DEFAULT,
+  AMPIEZZA_DEFAULT,
+  componiPreset,
+} from './config.js';
 import { generaPuzzle } from './puzzle.js';
 import { creaPartita } from './game.js';
 import { renderCorona, montaAutocomplete, renderMiniMappa, el } from './ui.js';
@@ -17,7 +23,8 @@ const $$ = (sel) => [...document.querySelectorAll(sel)];
 
 const app = {
   countries: [],
-  difficolta: DIFFICOLTA_DEFAULT,
+  indizi: INDIZI_DEFAULT, // asse 1: quantità indizi
+  ampiezza: AMPIEZZA_DEFAULT, // asse 2: ampiezza panel nazioni
   modalita: 'infinita',
   partita: null,
   puzzle: null,
@@ -30,7 +37,7 @@ const app = {
 
 async function init() {
   applicaTema(store.caricaTema());
-  caricaDifficoltaProfilo();
+  caricaLivelliProfilo();
 
   try {
     app.countries = await caricaCountries();
@@ -104,7 +111,8 @@ function wireNavigazione() {
 
 function montaHome() {
   renderProfili();
-  renderDifficolta();
+  renderIndizi();
+  renderAmpiezza();
 
   $('#btn-infinita').addEventListener('click', avviaInfinita);
   $('#btn-daily').addEventListener('click', avviaDaily);
@@ -114,10 +122,11 @@ function montaHome() {
   aggiornaAnteprimaStatistiche();
 }
 
-// Imposta app.difficolta dalla preferenza del profilo attivo.
-function caricaDifficoltaProfilo() {
-  const d = store.caricaImpostazioni().difficolta;
-  app.difficolta = d in DIFFICULTA ? d : DIFFICOLTA_DEFAULT;
+// Imposta i due assi (indizi + ampiezza) dalle preferenze del profilo attivo.
+function caricaLivelliProfilo() {
+  const imp = store.caricaImpostazioni();
+  app.indizi = imp.indizi in LIVELLI_INDIZI ? imp.indizi : INDIZI_DEFAULT;
+  app.ampiezza = imp.ampiezza in LIVELLI_AMPIEZZA ? imp.ampiezza : AMPIEZZA_DEFAULT;
 }
 
 // ---- Profili (§14): due giocatori fissi con salvataggi separati ----
@@ -141,9 +150,10 @@ function renderProfili() {
 
 function cambiaProfilo(id) {
   store.impostaProfilo(id);
-  caricaDifficoltaProfilo(); // ogni profilo ha la sua difficoltà preferita
+  caricaLivelliProfilo(); // ogni profilo ha le sue preferenze
   renderProfili();
-  renderDifficolta();
+  renderIndizi();
+  renderAmpiezza();
   aggiornaProfiloBadge();
   aggiornaAnteprimaStatistiche();
 }
@@ -157,26 +167,60 @@ function aggiornaProfiloBadge() {
   if (gioco) gioco.textContent = testo;
 }
 
-function renderDifficolta() {
-  const cont = $('#selettore-difficolta');
+// Asse 1: quantità di indizi.
+function renderIndizi() {
+  const cont = $('#selettore-indizi');
   if (!cont) return;
   cont.innerHTML = '';
-  Object.values(DIFFICULTA).forEach((d) => {
+  Object.values(LIVELLI_INDIZI).forEach((d) => {
     const b = el('button', {
-      class: 'chip' + (d.id === app.difficolta ? ' chip--attivo' : ''),
+      class: 'chip' + (d.id === app.indizi ? ' chip--attivo' : ''),
       type: 'button',
-      dataset: { diff: d.id },
+      dataset: { liv: String(d.liv) },
     });
     b.appendChild(el('span', { class: 'chip__nome' }, d.nome));
-    b.appendChild(el('span', { class: 'chip__meta' }, `${d.clues} indizi · ${d.tentativi} tentativi`));
+    b.appendChild(el('span', { class: 'chip__meta' }, `${d.tentativi} tentativi`));
     b.addEventListener('click', () => {
-      app.difficolta = d.id;
-      store.salvaImpostazioni({ difficolta: d.id });
-      $$('#selettore-difficolta .chip').forEach((c) => c.classList.remove('chip--attivo'));
+      app.indizi = d.id;
+      store.salvaImpostazioni({ indizi: d.id });
+      $$('#selettore-indizi .chip').forEach((c) => c.classList.remove('chip--attivo'));
       b.classList.add('chip--attivo');
     });
     cont.appendChild(b);
   });
+}
+
+// Asse 2: ampiezza del panel di nazioni (varietà).
+function renderAmpiezza() {
+  const cont = $('#selettore-ampiezza');
+  if (!cont) return;
+  cont.innerHTML = '';
+  const conteggi = contaPerAmpiezza();
+  Object.values(LIVELLI_AMPIEZZA).forEach((a) => {
+    const b = el('button', {
+      class: 'chip' + (a.id === app.ampiezza ? ' chip--attivo' : ''),
+      type: 'button',
+      dataset: { liv: String(a.liv) },
+    });
+    b.appendChild(el('span', { class: 'chip__nome' }, a.nome));
+    b.appendChild(el('span', { class: 'chip__meta' }, `${conteggi[a.id]} nazioni`));
+    b.addEventListener('click', () => {
+      app.ampiezza = a.id;
+      store.salvaImpostazioni({ ampiezza: a.id });
+      $$('#selettore-ampiezza .chip').forEach((c) => c.classList.remove('chip--attivo'));
+      b.classList.add('chip--attivo');
+    });
+    cont.appendChild(b);
+  });
+}
+
+// Quante nazioni entrano in gioco per ciascun livello di ampiezza.
+function contaPerAmpiezza() {
+  const r = {};
+  for (const a of Object.values(LIVELLI_AMPIEZZA)) {
+    r[a.id] = app.countries.filter((c) => c.tier <= a.maxTier).length;
+  }
+  return r;
 }
 
 function aggiornaAnteprimaStatistiche() {
@@ -201,7 +245,7 @@ function statPill(label, valore) {
 
 function avviaInfinita() {
   app.modalita = 'infinita';
-  const preset = DIFFICULTA[app.difficolta];
+  const preset = componiPreset(app.indizi, app.ampiezza);
   // Evita di ripetere i target più recenti (varietà tra partite consecutive).
   app.puzzle = generaPuzzle(app.countries, preset, Math.random, {
     escludiTarget: app.ultimiTarget,
@@ -229,7 +273,7 @@ function avviaDaily() {
   }
 
   // Difficoltà fissa per la Sfida del giorno: uguale per tutti (§13).
-  const preset = DIFFICULTA.medio;
+  const preset = componiPreset('medi', 'estesa');
   const rng = rngGiornaliero(data);
   app.puzzle = generaPuzzle(app.countries, preset, rng);
   app.partita = creaPartita(app.puzzle, app.countries, preset, { modalita: 'daily' });
@@ -285,7 +329,8 @@ function preparaGioco() {
   // Intestazione.
   $('#gioco-modalita').textContent =
     app.modalita === 'daily' ? `Sfida del giorno #${numeroSfida(dataOggi())}` : 'Modalità Infinita';
-  $('#gioco-difficolta').textContent = DIFFICULTA[p.stato.difficolta.id].nome;
+  const preset = p.stato.difficolta;
+  $('#gioco-difficolta').textContent = `${preset.clues} indizi · ${preset.nomeAmpiezza}`;
   aggiornaProfiloBadge();
 
   aggiornaContatori();

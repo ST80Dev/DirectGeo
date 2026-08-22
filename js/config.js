@@ -95,8 +95,9 @@ export const PUNTEGGIO = {
   penalitaTentativo: 15, // per ogni tentativo errato
   penalitaAiuto: 20, // per ogni aiuto usato
   penalitaIndizioExtra: 25, // per ogni indizio extra sbloccato
-  bonusVelocitaMax: 100, // bonus massimo se risolto istantaneamente
-  bonusVelocitaFinestra: 120, // secondi entro cui decade il bonus velocità
+  bonusVelocitaMax: 100, // bonus velocità a inizio round
+  bonusVelocitaPasso: 10, // punti persi a ogni blocco
+  bonusVelocitaIntervallo: 10, // secondi per blocco: −10 punti ogni 10s (decadimento a scatti)
   minimo: 10, // punteggio minimo garantito per una vittoria
 };
 

@@ -86,6 +86,7 @@ function vaiA(nome) {
   $$('.schermata').forEach((s) => s.classList.remove('attiva'));
   const target = $('#schermata-' + nome);
   if (target) target.classList.add('attiva');
+  document.body.dataset.schermata = nome; // usato per adattare il layout (es. footer)
   window.scrollTo(0, 0);
 }
 
@@ -350,12 +351,19 @@ function aggiornaContatori() {
   $('#contatore-tentativi').textContent = `${rimasti}/${p.stato.tentativiMax}`;
   aggiornaPunti();
   $('#contatore-indizi').textContent = String(p.stato.indiziVisibili.length);
+  aggiornaTotale();
 }
 
-// Mostra la proiezione live del punteggio (coincide col punteggio finale, §11).
+// Punti che incasseresti ORA per questo round: numero preciso, non una stima.
 function aggiornaPunti() {
   if (!app.partita) return;
-  $('#contatore-punteggio').textContent = `~${app.partita.punteggioProiettato()}`;
+  $('#contatore-punteggio').textContent = String(app.partita.punteggioProiettato());
+}
+
+// Totale punti accumulati dal profilo (cresce a ogni vittoria).
+function aggiornaTotale() {
+  const el = $('#contatore-totale');
+  if (el) el.textContent = String(store.caricaStatistiche().puntiTotali);
 }
 
 // Ticker: il bonus velocità decade nel tempo, quindi il punteggio va aggiornato
@@ -533,13 +541,17 @@ function mostraFine(riepilogo) {
   // Dettaglio punteggio.
   if (riepilogo.vinta) {
     const det = el('div', { class: 'punteggio-dettaglio' });
-    det.appendChild(el('div', { class: 'punteggio-totale' }, `${riepilogo.punti} punti`));
+    det.appendChild(el('div', { class: 'punteggio-totale' }, `+${riepilogo.punti} punti`));
     const righe = el('ul', { class: 'punteggio-righe' });
     righe.appendChild(el('li', {}, `Tentativi errati: ${riepilogo.tentativiErrati}`));
     righe.appendChild(el('li', {}, `Indizi extra: ${riepilogo.indiziExtraSbloccati}`));
     righe.appendChild(el('li', {}, `Aiuti usati: ${riepilogo.aiutiUsati.length}`));
     righe.appendChild(el('li', {}, `Bonus velocità: +${riepilogo.bonusVelocita} (${riepilogo.tempoSecondi}s)`));
     det.appendChild(righe);
+    // Totale accumulato (aggiornato: concludi() ha già registrato la partita).
+    det.appendChild(
+      el('div', { class: 'punteggio-cumulativo' }, `Totale: ${store.caricaStatistiche().puntiTotali} punti`)
+    );
     box.appendChild(det);
   }
 

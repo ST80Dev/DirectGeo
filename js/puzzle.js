@@ -100,7 +100,7 @@ function valutaUnivocita(target, indizi, tutti) {
  * partita.
  *
  * @param {object[]} countries dataset completo
- * @param {object} difficolta preset da config.DIFFICULTA
+ * @param {object} difficolta preset combinato (config.componiPreset)
  * @param {() => number} [rng] generatore [0,1); default Math.random (Infinita).
  *        Per la Sfida del giorno si passa un RNG deterministico (daily.js).
  * @param {{escludiTarget?: Iterable<string>}} [opzioni] iso dei target da evitare
@@ -117,39 +117,50 @@ export function generaPuzzle(countries, difficolta, rng = Math.random, opzioni =
   const targetPool = targetPoolFiltrato.length >= 3 ? targetPoolFiltrato : targetPoolTutti;
   const cluePoolTutti = countries.filter((c) => c.tier <= difficolta.maxTier);
 
-  let migliorePuzzle = null;
-  let miglioreErrore = -1;
-
-  for (let tentativo = 0; tentativo < SELEZIONE.maxTentativiGenerazione; tentativo++) {
-    const target = scegli(targetPool, rng);
-
-    // Candidati indizio: entro i vincoli di distanza (§7).
-    const candidati = cluePoolTutti
-      .filter((c) => c !== target)
-      .map((c) => ({ country: c, bearing: bearingFlat(target, c), dist: flatDistance(target, c) }))
+  // FASE 1 — scelta del target UNIFORME, indipendente dall'univocità.
+  // È il punto chiave contro il bias: se scegliessimo il target e restituissimo
+  // il primo "univoco", i Paesi isolati (Canada, Russia, Australia, ...) — facili
+  // da rendere univoci — uscirebbero molto più spesso di quelli fitti (Europa,
+  // Africa centrale). Qui ogni target ha la stessa probabilità; si riprova solo
+  // se ha troppi pochi candidati-indizio (caso raro).
+  let target = null;
+  let candidati = null;
+  for (let t = 0; t < 40; t++) {
+    const cand = scegli(targetPool, rng);
+    const lista = cluePoolTutti
+      .filter((c) => c !== cand)
+      .map((c) => ({ country: c, bearing: bearingFlat(cand, c), dist: flatDistance(cand, c) }))
       .filter((c) => c.dist >= SELEZIONE.minClueDist)
       .filter((c) => SELEZIONE.maxClueDist === 0 || c.dist <= SELEZIONE.maxClueDist);
+    if (lista.length >= difficolta.clues) {
+      target = cand;
+      candidati = lista;
+      break;
+    }
+  }
+  if (!target) return fallbackPuzzle(countries, difficolta, rng);
 
-    if (candidati.length < difficolta.clues) continue;
-
+  // FASE 2 — per QUEL target, cerca il set di indizi meno ambiguo possibile,
+  // mantenendo sempre esattamente `difficolta.clues` frecce. La varietà degli
+  // indizi resta garantita dalla selezione casuale (selezionaIndizi).
+  let migliorePuzzle = null;
+  let miglioreErrore = -1;
+  for (let k = 0; k < SELEZIONE.maxTentativiIndizi; k++) {
     const indizi = selezionaIndizi(candidati, difficolta.clues, difficolta.minAngularGap, rng);
-    if (indizi.length < difficolta.clues) continue; // sempre ESATTAMENTE N indizi
+    if (indizi.length < difficolta.clues) continue;
 
     const { errore } = valutaUnivocita(target, indizi, countries);
-
-    // Univoco al primo colpo? Restituisci subito, con il numero esatto di indizi.
     if (errore >= SELEZIONE.tolleranzaUnivocita) {
       return costruisciPuzzle(target, indizi, difficolta, true);
     }
-    // Altrimenti tieni il tentativo meno ambiguo e continua a rigenerare.
     if (errore > miglioreErrore) {
       miglioreErrore = errore;
       migliorePuzzle = costruisciPuzzle(target, indizi, difficolta, false);
     }
   }
 
-  // Nessun puzzle perfettamente univoco: restituisci il meno ambiguo trovato
-  // (sempre con il numero di indizi scelto). Raro con abbastanza tentativi.
+  // Target fitto/difficile da disambiguare: restituisci il set meno ambiguo
+  // trovato per QUESTO target (non si cambia target: la varietà viene prima).
   return migliorePuzzle || fallbackPuzzle(countries, difficolta, rng);
 }
 

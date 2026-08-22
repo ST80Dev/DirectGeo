@@ -74,16 +74,19 @@ export const PROFILO_DEFAULT = 'papa';
 /** Vincoli geografici sulla selezione degli indizi (in gradi di mappa piatta, §7). */
 export const SELEZIONE = {
   // Distanza minima di un indizio dal target: evita frecce "sopra" al target.
-  minClueDist: 8,
+  // Bassa apposta: gli indizi VICINI sono quelli che meglio distinguono un Paese
+  // dai suoi confinanti (bearing molto diverso tra target e vicino). Non troppo
+  // bassa però: con baricentri approssimati, indizi <~3° darebbero bearing instabili.
+  minClueDist: 3,
   // Distanza massima: evita indizi troppo lontani/ambigui (0 = nessun limite).
   maxClueDist: 0,
   // Tolleranza di univocità (§7.4): un altro Paese è "troppo compatibile" se il suo
   // errore angolare medio con gli indizi è entro questo margine dal target.
   tolleranzaUnivocita: 22,
-  // Numero massimo di (target + set di indizi) da provare per trovarne uno univoco
-  // mantenendo SEMPRE il numero di indizi scelto (nessun indizio aggiunto).
-  // Serve più alto con panel ampi (tante nazioni) e pochi indizi.
-  maxTentativiGenerazione: 600,
+  // Quanti set di indizi provare PER IL TARGET GIÀ SCELTO, per trovarne uno
+  // univoco mantenendo il numero di indizi scelto. Il target è scelto prima e in
+  // modo uniforme (niente bias verso i Paesi isolati), quindi qui variano solo gli indizi.
+  maxTentativiIndizi: 300,
 };
 
 /** Punteggio (§11). Formula tarabile. */

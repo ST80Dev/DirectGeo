@@ -99,7 +99,8 @@ function wireNavigazione() {
       if (dest === 'stats') aggiornaStatistiche();
       if (dest === 'home') {
         renderProfili();
-        renderDifficolta();
+        renderIndizi();
+        renderAmpiezza();
         aggiornaProfiloBadge();
         aggiornaAnteprimaStatistiche();
       }

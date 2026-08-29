@@ -15,8 +15,10 @@
  * - liv: 1..3 solo per il codice colore in UI (1 facile → 3 difficile).
  */
 // `minClueDist` e `sfida` sono per-livello (§7.4-ter):
-// - minClueDist: distanza minima di un indizio dal target. Bassa (3°) ai livelli
-//   accessibili — gli indizi vicini disambiguano bene. ALTA a "Pochi": la
+// - minClueDist: distanza minima di un indizio dal target. Cresce col livello per
+//   alzare la difficoltà media (Molti 6° · Medi 8°): niente più indizi quasi
+//   confinanti che "inchiodano" la posizione, ma abbastanza vicini da restare
+//   accessibili. ALTA a "Pochi" (10°): la
 //   PROSSIMITÀ non è mai un criterio di scelta, quindi i confinanti (es. Estonia
 //   a 4° dalla Lituania) non compaiono perché vicini; un Paese poco distante può
 //   uscire solo come raro residuo casuale, non per la sua vicinanza. Gli indizi
@@ -27,8 +29,8 @@
 //   e accetta un po' di ambiguità (mitigata da caldo/freddo e tentativi). A false
 //   (Molti/Medi) l'univocità viene prima e gli indizi vicini sono ammessi.
 export const LIVELLI_INDIZI = {
-  molti: { id: 'molti', nome: 'Molti (7)', clues: 7, tentativi: 5, minAngularGap: 28, liv: 1, minClueDist: 3, sfida: false },
-  medi: { id: 'medi', nome: 'Medi (5)', clues: 5, tentativi: 4, minAngularGap: 40, liv: 2, minClueDist: 3, sfida: false },
+  molti: { id: 'molti', nome: 'Molti (7)', clues: 7, tentativi: 5, minAngularGap: 28, liv: 1, minClueDist: 6, sfida: false },
+  medi: { id: 'medi', nome: 'Medi (5)', clues: 5, tentativi: 4, minAngularGap: 40, liv: 2, minClueDist: 8, sfida: false },
   pochi: { id: 'pochi', nome: 'Pochi (4)', clues: 4, tentativi: 3, minAngularGap: 55, liv: 3, minClueDist: 10, sfida: true },
 };
 

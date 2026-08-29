@@ -123,6 +123,10 @@ export function generaPuzzle(countries, difficolta, rng = Math.random, opzioni =
   // da rendere univoci — uscirebbero molto più spesso di quelli fitti (Europa,
   // Africa centrale). Qui ogni target ha la stessa probabilità; si riprova solo
   // se ha troppi pochi candidati-indizio (caso raro).
+  // Distanza minima degli indizi dal target: per livello (leva di difficoltà della
+  // triangolazione), con fallback al valore globale.
+  const minDist = difficolta.minClueDist ?? SELEZIONE.minClueDist;
+
   let target = null;
   let candidati = null;
   for (let t = 0; t < 40; t++) {
@@ -130,7 +134,7 @@ export function generaPuzzle(countries, difficolta, rng = Math.random, opzioni =
     const lista = cluePoolTutti
       .filter((c) => c !== cand)
       .map((c) => ({ country: c, bearing: bearingFlat(cand, c), dist: flatDistance(cand, c) }))
-      .filter((c) => c.dist >= SELEZIONE.minClueDist)
+      .filter((c) => c.dist >= minDist)
       .filter((c) => SELEZIONE.maxClueDist === 0 || c.dist <= SELEZIONE.maxClueDist);
     if (lista.length >= difficolta.clues) {
       target = cand;

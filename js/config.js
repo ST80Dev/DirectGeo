@@ -12,12 +12,16 @@
  * - clues: numero di Paesi-indizio nella corona (più indizi = più facile).
  * - tentativi: tentativi consentiti.
  * - minAngularGap: separazione angolare minima tra frecce, in gradi (§7.3).
+ * - minClueDist: distanza MINIMA (gradi mappa piatta) degli indizi dal target.
+ *     È la leva di difficoltà della triangolazione: indizi vicini/quasi confinanti
+ *     "inchiodano" la posizione (facile); indizi lontani danno solo una direzione
+ *     grossolana e obbligano a triangolare davvero (difficile).
  * - liv: 1..3 solo per il codice colore in UI (1 facile → 3 difficile).
  */
 export const LIVELLI_INDIZI = {
-  molti: { id: 'molti', nome: 'Molti (7)', clues: 7, tentativi: 5, minAngularGap: 28, liv: 1 },
-  medi: { id: 'medi', nome: 'Medi (5)', clues: 5, tentativi: 4, minAngularGap: 40, liv: 2 },
-  pochi: { id: 'pochi', nome: 'Pochi (4)', clues: 4, tentativi: 3, minAngularGap: 55, liv: 3 },
+  molti: { id: 'molti', nome: 'Molti (7)', clues: 7, tentativi: 5, minAngularGap: 28, minClueDist: 6, liv: 1 },
+  medi: { id: 'medi', nome: 'Medi (5)', clues: 5, tentativi: 4, minAngularGap: 40, minClueDist: 10, liv: 2 },
+  pochi: { id: 'pochi', nome: 'Pochi (4)', clues: 4, tentativi: 3, minAngularGap: 55, minClueDist: 18, liv: 3 },
 };
 
 /**
@@ -51,6 +55,7 @@ export function componiPreset(indiziId = INDIZI_DEFAULT, ampiezzaId = AMPIEZZA_D
     clues: ind.clues,
     tentativi: ind.tentativi,
     minAngularGap: ind.minAngularGap,
+    minClueDist: ind.minClueDist,
     maxTier: amp.maxTier,
     targetMaxTier: amp.targetMaxTier,
     // Punteggio base: più difficile su entrambi gli assi = più punti (§11).

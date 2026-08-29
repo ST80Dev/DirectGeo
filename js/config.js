@@ -12,16 +12,26 @@
  * - clues: numero di Paesi-indizio nella corona (più indizi = più facile).
  * - tentativi: tentativi consentiti.
  * - minAngularGap: separazione angolare minima tra frecce, in gradi (§7.3).
- * - minClueDist: distanza MINIMA (gradi mappa piatta) degli indizi dal target.
- *     È la leva di difficoltà della triangolazione: indizi vicini/quasi confinanti
- *     "inchiodano" la posizione (facile); indizi lontani danno solo una direzione
- *     grossolana e obbligano a triangolare davvero (difficile).
  * - liv: 1..3 solo per il codice colore in UI (1 facile → 3 difficile).
  */
+// `minClueDist` e `sfida` sono per-livello (§7.4-ter):
+// - minClueDist: distanza minima di un indizio dal target. Cresce col livello per
+//   alzare la difficoltà media (Molti 6° · Medi 8°): niente più indizi quasi
+//   confinanti che "inchiodano" la posizione, ma abbastanza vicini da restare
+//   accessibili. ALTA a "Pochi" (10°): la
+//   PROSSIMITÀ non è mai un criterio di scelta, quindi i confinanti (es. Estonia
+//   a 4° dalla Lituania) non compaiono perché vicini; un Paese poco distante può
+//   uscire solo come raro residuo casuale, non per la sua vicinanza. Gli indizi
+//   sono Paesi lontani da triangolare: concetto Hard / Very Hard.
+//   (10° è l'ottimo misurato: azzera i confinanti minimizzando i casi degeneri.)
+// - sfida: a true (solo "Pochi") il generatore NON ripiega sui vicini dello
+//   stesso continente per forzare l'univocità: tiene duro il mix cross-continente
+//   e accetta un po' di ambiguità (mitigata da caldo/freddo e tentativi). A false
+//   (Molti/Medi) l'univocità viene prima e gli indizi vicini sono ammessi.
 export const LIVELLI_INDIZI = {
-  molti: { id: 'molti', nome: 'Molti (7)', clues: 7, tentativi: 5, minAngularGap: 28, minClueDist: 6, liv: 1 },
-  medi: { id: 'medi', nome: 'Medi (5)', clues: 5, tentativi: 4, minAngularGap: 40, minClueDist: 10, liv: 2 },
-  pochi: { id: 'pochi', nome: 'Pochi (4)', clues: 4, tentativi: 3, minAngularGap: 55, minClueDist: 18, liv: 3 },
+  molti: { id: 'molti', nome: 'Molti (7)', clues: 7, tentativi: 5, minAngularGap: 28, liv: 1, minClueDist: 6, sfida: false },
+  medi: { id: 'medi', nome: 'Medi (5)', clues: 5, tentativi: 4, minAngularGap: 40, liv: 2, minClueDist: 8, sfida: false },
+  pochi: { id: 'pochi', nome: 'Pochi (4)', clues: 4, tentativi: 3, minAngularGap: 55, liv: 3, minClueDist: 10, sfida: true },
 };
 
 /**
@@ -56,6 +66,7 @@ export function componiPreset(indiziId = INDIZI_DEFAULT, ampiezzaId = AMPIEZZA_D
     tentativi: ind.tentativi,
     minAngularGap: ind.minAngularGap,
     minClueDist: ind.minClueDist,
+    sfida: ind.sfida,
     maxTier: amp.maxTier,
     targetMaxTier: amp.targetMaxTier,
     // Punteggio base: più difficile su entrambi gli assi = più punti (§11).
@@ -92,6 +103,54 @@ export const SELEZIONE = {
   // univoco mantenendo il numero di indizi scelto. Il target è scelto prima e in
   // modo uniforme (niente bias verso i Paesi isolati), quindi qui variano solo gli indizi.
   maxTentativiIndizi: 300,
+};
+
+/**
+ * Anti-"indizio servito" (§7.4-bis): due categorie di indizi troppo rivelatori,
+ * da EVITARE quando possibile ma da riammettere se un target isolato/incastrato
+ * non consente altrimenti di comporre gli N indizi richiesti (evitamento morbido).
+ *
+ * 1) INDIZIO-SPIA — un singolo indizio «Paese + direzione» identifica il target
+ *    quasi da solo. Es.: «Stati Uniti a Sud» ⇒ per forza Canada; «Corea del Sud
+ *    a Ovest» ⇒ Giappone. Si riconosce contando i Paesi "rivali": quante altre
+ *    nazioni hanno quello stesso Paese-indizio nella stessa direzione cardinale e
+ *    a distanza comparabile. Pochissimi rivali ⇒ è una spia.
+ *
+ * 2) CORONA TROPPO REGIONALE — troppi indizi sono vicini dello stesso continente
+ *    del target (quasi confinanti): basta riconoscere il "grappolo" regionale,
+ *    non serve triangolare. Si mette un tetto al numero di indizi "regionali".
+ */
+export const ANTISPIA = {
+  // --- Indizio-spia ---
+  // Un rivale condivide col target la direzione verso l'indizio se sta nello
+  // stesso settore cardinale (±gradi) e a distanza comparabile (entro ±fattore).
+  octantTol: 22.5,
+  distTol: 1.6,
+  // Numero massimo di rivali perché l'indizio sia ancora una "spia" da evitare
+  // (0 = spia assoluta, 1 = una sola alternativa plausibile). Le spie vengono
+  // evitate SOLO quando il target resta comunque univoco senza di esse: per certi
+  // Paesi (es. Canada) la spia «USA a Sud» è l'unico modo di renderli univoci, e
+  // in quei casi si tiene. Vedi la logica a due fasi in puzzle.js.
+  maxRivali: 1,
+
+  // --- Corona troppo regionale (tetto VARIABILE per varietà) ---
+  // Frazione massima di indizi dello stesso continente del target: il resto deve
+  // venire da altri continenti, così bisogna triangolare e non basta riconoscere
+  // il "grappolo" regionale (es. Bolivia+Cile+Uruguay ⇒ per forza Argentina).
+  // Per OGNI puzzle il tetto viene estratto a caso in questo intervallo (dall'rng,
+  // quindi deterministico per la Sfida del giorno): così due partite con la stessa
+  // difficoltà scelta hanno corone diverse — a volte spietate tutte cross-continente
+  // (~1/3), a volte più morbide (~1/2). Vedi `estraiProfilo` in puzzle.js.
+  fraLocaliMin: 0.3,
+  fraLocaliMax: 0.5,
+
+  // --- Ancore meno famose (preferenza VARIABILE per varietà) ---
+  // Solo quando il panel scelto contiene più di un tier (Estesa / Tutto il mondo):
+  // per ogni puzzle si estrae un "peso fama" casuale in [0, pesoFamaMax]; più alto è,
+  // più spesso, a parità di buona separazione angolare, si preferisce come indizio
+  // la nazione MENO nota (tier più alto). Aggiunge varietà e difficoltà senza toccare
+  // la geometria né l'univocità. 0 disattiva del tutto la preferenza.
+  pesoFamaMax: 0.8,
 };
 
 /** Punteggio (§11). Formula tarabile. */

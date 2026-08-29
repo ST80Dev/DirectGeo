@@ -361,10 +361,13 @@ function aggiornaPunti() {
   $('#contatore-punteggio').textContent = String(app.partita.punteggioProiettato());
 }
 
-// Totale punti accumulati dal profilo (cresce a ogni vittoria).
+// Rating (media mobile, NON cumulativo) della difficoltà attualmente in gioco.
 function aggiornaTotale() {
-  const el = $('#contatore-totale');
-  if (el) el.textContent = String(store.caricaStatistiche().puntiTotali);
+  const nodo = $('#contatore-totale');
+  if (!nodo) return;
+  const p = app.partita;
+  const id = p ? p.stato.difficolta.id : componiPreset(app.indizi, app.ampiezza).id;
+  nodo.textContent = String(store.ratingDifficolta(id).rating);
 }
 
 // Ticker: il bonus velocità decade nel tempo, quindi il punteggio va aggiornato
@@ -504,11 +507,14 @@ function concludi(riepilogo) {
     const s = store.caricaStatistiche();
     store.aggiornaRecord({ punti: riepilogo.punti, cumulativo: s.puntiTotali });
   }
+  // Rating (media mobile, NON cumulativo) della difficoltà giocata: le sconfitte
+  // entrano come 0 punti e lo abbassano (riepilogo.punti è 0 se persa).
+  const ratingEsito = store.registraRating(p.stato.difficolta.id, riepilogo.punti);
 
-  mostraFine(riepilogo);
+  mostraFine(riepilogo, ratingEsito);
 }
 
-function mostraFine(riepilogo) {
+function mostraFine(riepilogo, ratingEsito) {
   vaiA('fine');
   const p = app.partita;
   const target = riepilogo.target;
@@ -549,11 +555,23 @@ function mostraFine(riepilogo) {
     righe.appendChild(el('li', {}, `Aiuti usati: ${riepilogo.aiutiUsati.length}`));
     righe.appendChild(el('li', {}, `Bonus velocità: +${riepilogo.bonusVelocita} (${riepilogo.tempoSecondi}s)`));
     det.appendChild(righe);
-    // Totale accumulato (aggiornato: concludi() ha già registrato la partita).
-    det.appendChild(
-      el('div', { class: 'punteggio-cumulativo' }, `Totale: ${store.caricaStatistiche().puntiTotali} punti`)
-    );
     box.appendChild(det);
+  }
+
+  // Rating della difficoltà giocata (media mobile, NON cumulativo): mostrato sia
+  // in vittoria sia in sconfitta, con la variazione rispetto a prima.
+  if (ratingEsito) {
+    const diff = p.stato.difficolta;
+    const d = ratingEsito.delta;
+    const segno = d > 0 ? `▲ +${d}` : d < 0 ? `▼ ${d}` : '± 0';
+    const rbox = el('div', { class: 'rating-fine' });
+    rbox.appendChild(
+      el('div', { class: 'rating-fine__valore' }, `Rating ${diff.nomeIndizi} · ${diff.nomeAmpiezza}: ${ratingEsito.rating}`)
+    );
+    rbox.appendChild(
+      el('div', { class: 'rating-fine__delta' }, `${segno} · media delle tue partite a questa difficoltà`)
+    );
+    box.appendChild(rbox);
   }
 
   // Azioni.
@@ -655,14 +673,56 @@ function aggiornaStatistiche() {
     ['Tentativi medi', mediaTent],
     ['Streak infinita', `${s.streakInfinita} (record ${s.migliorStreakInfinita})`],
     ['Streak giornaliera', `${d.streak} (record ${d.migliorStreak})`],
-    ['Miglior punteggio', r.migliore],
-    ['Punti totali', s.puntiTotali],
+    ['Miglior partita', r.migliore],
   ];
   for (const [label, valore] of voci) {
     const card = el('div', { class: 'stat-card' });
     card.appendChild(el('span', { class: 'stat-card__valore' }, String(valore)));
     card.appendChild(el('span', { class: 'stat-card__label' }, label));
     griglia.appendChild(card);
+  }
+
+  aggiornaRatingsPerDifficolta();
+}
+
+// "medi-estesa" -> ["medi","estesa"] (l'id dell'ampiezza non contiene '-').
+function spezzaPreset(id) {
+  const i = id.indexOf('-');
+  return i < 0 ? [id, ''] : [id.slice(0, i), id.slice(i + 1)];
+}
+
+// Rating (media mobile, NON cumulativo) per ciascuna difficoltà giocata.
+function aggiornaRatingsPerDifficolta() {
+  const cont = $('#stats-ratings');
+  if (!cont) return;
+  cont.innerHTML = '';
+  const ratings = store.caricaRatings();
+  const ordineInd = ['molti', 'medi', 'pochi'];
+  const ordineAmp = ['famose', 'estesa', 'mondiale'];
+  const ids = Object.keys(ratings).filter((id) => (ratings[id].partite || 0) > 0);
+  ids.sort((a, b) => {
+    const [ia, aa] = spezzaPreset(a);
+    const [ib, ab] = spezzaPreset(b);
+    return (
+      ordineInd.indexOf(ia) - ordineInd.indexOf(ib) ||
+      ordineAmp.indexOf(aa) - ordineAmp.indexOf(ab)
+    );
+  });
+
+  cont.appendChild(el('h3', { class: 'stats-ratings__titolo' }, 'Rating per difficoltà'));
+  if (ids.length === 0) {
+    cont.appendChild(el('p', { class: 'nota' }, 'Gioca qualche partita per costruire il tuo rating.'));
+    return;
+  }
+  for (const id of ids) {
+    const [ind, amp] = spezzaPreset(id);
+    const preset = componiPreset(ind, amp);
+    const info = ratings[id];
+    const riga = el('div', { class: 'rating-riga' });
+    riga.appendChild(el('span', { class: 'rating-riga__nome' }, `${preset.nomeIndizi} · ${preset.nomeAmpiezza}`));
+    riga.appendChild(el('span', { class: 'rating-riga__valore' }, String(info.rating)));
+    riga.appendChild(el('span', { class: 'rating-riga__meta' }, `best ${info.migliore} · ${info.partite} partite`));
+    cont.appendChild(riga);
   }
 }
 

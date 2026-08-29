@@ -582,6 +582,20 @@ body:not([data-schermata='home']) .footer { display: none; }
 .punteggio-righe { list-style: none; padding: 0; margin: 0.6rem 0 0; color: var(--testo-soft); }
 .punteggio-righe li { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--bordo); padding: 0.35rem 0; }
 
+/* Rating (media mobile, non cumulativo) mostrato a fine partita. */
+.rating-fine {
+  margin: 0.9rem auto 0;
+  max-width: 380px;
+  background: var(--superficie);
+  border: 1px solid var(--bordo);
+  border-left: 4px solid var(--viola);
+  border-radius: var(--raggio);
+  padding: 0.7rem 1rem;
+  box-shadow: var(--ombra-morbida);
+}
+.rating-fine__valore { font-weight: 800; font-size: 1.15rem; color: var(--viola-2, var(--brand)); }
+.rating-fine__delta { font-size: 0.85rem; color: var(--testo-soft); margin-top: 0.15rem; }
+
 .fine-azioni { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-top: 1.3rem; }
 .fine-azioni .btn { flex: 1; min-width: 150px; }
 
@@ -598,6 +612,25 @@ body:not([data-schermata='home']) .footer { display: none; }
 }
 .stat-card__valore { display: block; font-size: 1.7rem; font-weight: 800; }
 .stat-card__label { display: block; font-size: 0.85rem; color: var(--testo-soft); }
+
+/* Rating per difficoltà (media mobile, non cumulativo). */
+.stats-ratings { margin: 0.4rem 0 1.1rem; }
+.stats-ratings__titolo { font-size: 1rem; margin: 0 0 0.5rem; color: var(--testo); }
+.rating-riga {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  background: var(--superficie);
+  border: 1px solid var(--bordo);
+  border-left: 4px solid var(--viola);
+  border-radius: var(--raggio);
+  padding: 0.55rem 0.8rem;
+  margin-bottom: 0.5rem;
+  box-shadow: var(--ombra-morbida);
+}
+.rating-riga__nome { flex: 1; font-weight: 700; }
+.rating-riga__valore { font-size: 1.35rem; font-weight: 900; color: var(--viola-2, var(--brand)); }
+.rating-riga__meta { font-size: 0.8rem; color: var(--testo-soft); }
 .nota { font-size: 0.9rem; color: var(--testo-soft); text-align: center; }
 .nota strong { color: var(--testo); }
 

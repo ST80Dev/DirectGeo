@@ -199,6 +199,50 @@ export function aggiornaRecord({ punti = 0, cumulativo = 0 } = {}) {
   return r;
 }
 
+// ---- Rating per difficoltà (media mobile, NON cumulativa) ----
+// A differenza del totale accumulato, il rating misura "quanto giochi BENE",
+// non "quanto giochi": è la media mobile esponenziale dei punti-partita per una
+// data difficoltà. Le partite recenti pesano di più (forma attuale) e le
+// sconfitte entrano come 0 punti, quindi abbassano il rating. Poiché i punti di
+// una partita premiano già difficoltà (base) e velocità (bonus) meno errori e
+// aiuti, il rating valorizza indovinare in fretta e a difficoltà alta.
+//
+// Struttura: rosadeipaesi:<profilo>:ratings -> { [presetId]: {rating, partite, migliore} }
+// dove presetId è l'id della difficoltà combinata (es. 'medi-estesa').
+
+// Peso delle partite recenti nella media mobile (0..1): 0.25 ≈ ultime ~4-7 partite.
+const RATING_ALFA = 0.25;
+
+export function caricaRatings() {
+  return { ...leggi(kp('ratings'), {}) };
+}
+
+/** Rating di una singola difficoltà (o valori a zero se mai giocata). */
+export function ratingDifficolta(presetId) {
+  return caricaRatings()[presetId] || { rating: 0, partite: 0, migliore: 0 };
+}
+
+/**
+ * Aggiorna il rating della difficoltà `presetId` con i punti di una partita
+ * appena conclusa (0 se persa: le sconfitte abbassano il rating).
+ * @returns {{rating:number, partite:number, migliore:number, delta:number}}
+ *          `delta` = variazione del rating rispetto a prima di questa partita.
+ */
+export function registraRating(presetId, punti) {
+  const tutti = caricaRatings();
+  const cur = tutti[presetId] || { rating: 0, partite: 0, migliore: 0 };
+  const p = Math.max(0, Math.round(punti || 0));
+  const prima = cur.rating;
+  // Prima partita: il rating parte dal punteggio; poi media mobile esponenziale.
+  const nuovo = cur.partite === 0 ? p : cur.rating * (1 - RATING_ALFA) + p * RATING_ALFA;
+  cur.rating = Math.round(nuovo);
+  cur.partite += 1;
+  cur.migliore = Math.max(cur.migliore, p);
+  tutti[presetId] = cur;
+  scrivi(kp('ratings'), tutti);
+  return { ...cur, delta: cur.rating - Math.round(prima) };
+}
+
 // ---- Sfida del giorno (storico + streak giornaliera) ----
 
 const DAILY_DEFAULT = {
@@ -261,7 +305,7 @@ function giornoPrecedente(data) {
 
 /** Azzera i salvataggi di un singolo profilo (default: quello attivo). */
 export function azzeraProfilo(id = profiloAttivo()) {
-  for (const base of ['impostazioni', 'statistiche', 'record', 'daily']) {
+  for (const base of ['impostazioni', 'statistiche', 'record', 'daily', 'ratings']) {
     rimuovi(kp(base, id));
   }
 }

@@ -32,16 +32,35 @@ function contaRivali(target, clueCountry, bearing, dist, tutti) {
 }
 
 /**
+ * Macro-regione di un continente: le tre Americhe contano come UNA sola regione.
+ * Il dataset le distingue (Settentrionale/Centrale/Meridionale), ma per un target
+ * americano un indizio in un'altra "America" è comunque un vicino continentale:
+ * senza questo raggruppamento una corona tutta-americana sfuggirebbe al tetto
+ * anti-regionale (es. Venezuela con Suriname + Perù + El Salvador + Antigua).
+ */
+function macroRegione(continente) {
+  if (
+    continente === 'America Settentrionale' ||
+    continente === 'America Centrale' ||
+    continente === 'America Meridionale'
+  ) {
+    return 'Americhe';
+  }
+  return continente;
+}
+
+/**
  * Marca ogni candidato con due flag (§7.4-bis):
  * - `spia`   : indizio che da solo identifica il target (pochi rivali);
- * - `locale` : indizio dello stesso continente del target (rende la corona
+ * - `locale` : indizio della stessa MACRO-regione del target (rende la corona
  *              "regionale" se troppi indizi lo sono).
  * Il target è scelto una volta sola (FASE 1), quindi si marca il pool una volta.
  */
 function marcaCandidati(target, candidati, tutti) {
+  const regioneTarget = macroRegione(target.continente);
   for (const c of candidati) {
     c.spia = contaRivali(target, c.country, c.bearing, c.dist, tutti) <= ANTISPIA.maxRivali;
-    c.locale = c.country.continente === target.continente;
+    c.locale = macroRegione(c.country.continente) === regioneTarget;
   }
 }
 

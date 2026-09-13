@@ -18,12 +18,15 @@
 // - minClueDist: distanza minima di un indizio dal target. Cresce col livello per
 //   alzare la difficoltà media (Molti 6° · Medi 8°): niente più indizi quasi
 //   confinanti che "inchiodano" la posizione, ma abbastanza vicini da restare
-//   accessibili. ALTA a "Pochi" (10°): la
+//   accessibili. MOLTO ALTA a "Pochi" (18°): la
 //   PROSSIMITÀ non è mai un criterio di scelta, quindi i confinanti (es. Estonia
 //   a 4° dalla Lituania) non compaiono perché vicini; un Paese poco distante può
 //   uscire solo come raro residuo casuale, non per la sua vicinanza. Gli indizi
 //   sono Paesi lontani da triangolare: concetto Hard / Very Hard.
-//   (10° è l'ottimo misurato: azzera i confinanti minimizzando i casi degeneri.)
+//   (18°: a 10° passavano ancora vicini quasi-confinanti — es. Suriname a ~10°
+//   dal Venezuela — che "inchiodavano" la posizione; 18° li esclude e obbliga a
+//   triangolare da riferimenti davvero lontani. Vedi anche la macro-regione
+//   "Americhe" in puzzle.js, che evita corone tutte-americane.)
 // - sfida: a true (solo "Pochi") il generatore NON ripiega sui vicini dello
 //   stesso continente per forzare l'univocità: tiene duro il mix cross-continente
 //   e accetta un po' di ambiguità (mitigata da caldo/freddo e tentativi). A false
@@ -31,7 +34,7 @@
 export const LIVELLI_INDIZI = {
   molti: { id: 'molti', nome: 'Molti (7)', clues: 7, tentativi: 5, minAngularGap: 28, liv: 1, minClueDist: 6, sfida: false },
   medi: { id: 'medi', nome: 'Medi (5)', clues: 5, tentativi: 4, minAngularGap: 40, liv: 2, minClueDist: 8, sfida: false },
-  pochi: { id: 'pochi', nome: 'Pochi (4)', clues: 4, tentativi: 3, minAngularGap: 55, liv: 3, minClueDist: 10, sfida: true },
+  pochi: { id: 'pochi', nome: 'Pochi (4)', clues: 4, tentativi: 3, minAngularGap: 55, liv: 3, minClueDist: 18, sfida: true },
 };
 
 /**
